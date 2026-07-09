@@ -1,0 +1,174 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+{% block title %}
+    Encuesta
+{% endblock %}
+{% block styles %}
+    <style>
+        .form-group {
+            margin-bottom: 1rem !important;
+            margin-top: 1rem !important;
+        }
+        .wrap {
+            display: flex;
+        }
+        .inner2 {
+            align-self: center;
+            font-size: 12.6px;
+        }
+        .inner {
+            align-self: center;
+        }
+
+        p {
+            margin-top: 1rem !important;
+        }
+            .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+        .result{font-size:0.850em;line-height:0.1em;margin:-0px 0 20px 20px}
+    </style>
+
+<script src="{{ static 'persist-raw.js' }}"></script>
+{% endblock %}
+
+{% block content %}
+<p align="justify"> Por favor responda las siguientes preguntas.</p>
+<div class="d-flex align-items-start wrap">
+        <p class="inner" align="Left"><b>1)</b> Edad:   &nbsp;&nbsp;  </p>
+        <div class="inner">
+        {%formfield player.age label="" %}
+        </div>
+</div>
+<div class="d-flex align-items-start wrap">
+    <p class="inner"  align="justify"><b>2)</b> Sexo:  &nbsp;&nbsp;  </p>
+    <div class="inner">
+                {%formfield player.gender_sex label="" %}
+    </div>
+</div>
+
+<div class="d-flex align-items-start wrap">
+    <p class="inner"  align="justify"><b>3)</b> ¿Qué carrera cursó o cursa actualmente?  &nbsp;&nbsp;  </p>
+    <div class="inner">
+                {%formfield player.major label="" %}
+    </div>
+</div>
+
+<div class="d-flex align-items-start wrap">
+    <p  class="inner" align="justify"><b>4)</b> Semestre que cursa del pregrado: (si ya finalizó su pregrado seleccione "Egresado")  &nbsp;&nbsp; </p>
+    <div class="inner">
+                {%formfield player.semester label=""%}
+    </div>
+</div>
+
+    <div class="d-flex align-items-start wrap">
+        <p class="inner" align="justify"><b>7)</b> De acuerdo con las facturas de servicios, ¿Cuál es el estrato de la vivienda en la cual reside?: &nbsp;&nbsp;</p>
+        <div class="inner">
+            {%formfield player.stratum  label=""%}
+        </div>
+    </div>
+
+    <div>
+        <div class="d-flex align-items-start wrap">
+        <p class="inner" align="justify"><b>10)</b> ¿Ha participado antes en experimentos de economía o psicología? &nbsp;&nbsp;</p>
+        <div class="inner">
+            {%formfield player.experiments label=""%}
+        </div>
+    </div>
+    <div class="d-flex align-items-start wrap">
+        <p  class="inner" align="justify"><b>11)</b> A cuánto ascienden aproximadamente sus ingresos semanales (en pesos): (Incluya todo tipo de ingresos ej: mesadas, ingresos laborales, rentas, etc.) </p>
+        <div class="result">
+                {%formfield player.income label=""%}
+        </div>
+    </div>
+        <div class="d-flex align-items-start wrap">
+        <p class="inner" align="justify"><b>12)</b> ¿Cuál es el máximo nivel de educación alcanzado por su madre? &nbsp;&nbsp;</p>
+        <div class="inner">
+            {%formfield player.mother_educ label=""%}
+        </div>
+    </div>
+        <div class="d-flex align-items-start wrap">
+        <p class="inner" align="justify"><b>13)</b> ¿Cuál es el máximo nivel de educación alcanzado por su padre? &nbsp;&nbsp;</p>
+        <div class="inner">
+            {%formfield player.father_educ label=""%}
+        </div>
+    </div>
+
+        <div class="d-flex align-items-start wrap">
+        <p  class="inner" align="justify"><b>14)</b> Imagine una escalera con 10 escalones. Las personas con los ingresos más <b>bajos</b> se sitúan en el escalón 1 y las personas con los ingresos más <b>altos</b> en el escalón 10. ¿Dónde situarías a tu grupo familiar? </p>
+    </div>
+        <div style="display: flex">
+        {{ for choice in form.income_stair }}
+        <div style="flex: 1; text-align: center">
+            {{ choice }}
+            <br>
+            <span style="text-align: center">{{ choice.label }}</span>
+        </div>
+        {{ endfor }}
+</div>
+{{ formfield_errors 'income_stair' }}
+<br>
+<div class="d-flex align-items-start wrap">
+    <p  class="inner" align="justify"><b>15)</b> En una escala del 0 al 10, donde <b>0 significa que "no está dispuesto(a) a tomar riesgos en lo absoluto"</b> y <b>10 significa que "está muy dispuesto(a) a tomar riesgos"</b>, por favor, dígame, en general
+    ¿qué tan dispuesto (a) está o no está usted a tomar riesgos? Puede usar cualquier número entre 0 y 10 para indicar en qué lugar de la escala se encuentra:  &nbsp;&nbsp; </p>
+</div>
+<div style="display: flex">
+    {{ for choice in form.risk_measure }}
+    <div style="flex: 1; text-align: center">
+        {{ choice }}
+        <br>
+        <span style="text-align: center">{{ choice.label }}</span>
+    </div>
+    {{ endfor }}
+</div>
+{{ formfield_errors 'risk_measure' }}
+<br>
+<div class="d-flex align-items-start wrap">
+        <p  class="inner" align="justify"><b>16)</b> En una escala del 0 al 10, donde <b>0 significa que "Por lo general, hay que tener mucho
+            cuidado de las personas"</b> y <b>10 significa "Por lo general, se puede confiar en la gente"</b>, ¿usted diría que se puede confiar en la mayoría de la gente o que hay que tener mucho cuidado al tratar con las personas?
+        </p>
+</div>
+<div style="display: flex">
+    {{ for choice in form.G_trust }}
+    <div style="flex: 1; text-align: center">
+        {{ choice }}
+        <br>
+        <span style="text-align: center">{{ choice.label }}</span>
+    </div>
+    {{ endfor }}
+</div>
+{{ formfield_errors 'G_trust' }}
+<br>
+<div class="d-flex align-items-start wrap">
+    <p  class="inner" align="justify"><b>18)</b> ¿En su vida personal, ¿en qué medida está dispuesto a renunciar a algo que puede ser beneficioso para usted hoy a cambio de obtener mayores beneficios en el futuro?
+        Para ello utilice la siguiente escala de 1 al 5, donde 1 significa que usted <b>no está dispuesto</b> a renunciar a obtener los beneficios hoy y 5 significa que usted está <b>totalmente dispuesto</b> a esperar a cambio de beneficios mayores en el futuro</p>
+</div>
+<div style="display: flex">
+    {{ for choice in form.patience }}
+    <div style="flex: 1; text-align: center">
+        {{ choice }}
+        <br>
+        <span style="text-align: center">{{ choice.label }}</span>
+    </div>
+    {{ endfor }}
+</div>
+{{ formfield_errors 'patience' }}
+
+<div class="d-flex align-items-start wrap">
+    <p class="inner" align="justify"><b>19)</b> Si usted fuera víctima de un robo o asalto, ¿cuánto confiaría que el sistema judicial castigue al culpable?  &nbsp;&nbsp;</p>
+    <div class="inner">
+        {%formfield player.punish_justice label=""%}
+    </div>
+</div>
+
+<br>
+<br>
+<div class="text-center py-2">
+{% next_button %}
+</div>
+
+<br>
+{% endblock %}

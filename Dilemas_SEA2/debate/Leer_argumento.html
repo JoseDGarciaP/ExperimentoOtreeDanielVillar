@@ -1,0 +1,25 @@
+{{ extends 'global/Page.html' }}
+{{ block title }}Ronda 1: Pareja{{ endblock }}
+
+{{ block content }}
+
+<p>
+    ¿Deberían los estudiantes seguir denunciando las actividades ilegales que están contaminando la Ciénaga?
+</p>
+
+<p>
+    La argumentación de la otra persona es la siguiente:   
+</p>
+
+<div style="border: 2px solid #000000; padding: 20px; margin: 20px 0; background-color: #f9f9f9; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 8px;">
+    {% if player.agree == 0 %}
+        {{ group.arg_a_favor }}
+    {% else %}
+        {{ group.arg_en_contra }}
+    {% endif %}
+</div>
+
+
+{{ next_button }}
+
+{{ endblock }}

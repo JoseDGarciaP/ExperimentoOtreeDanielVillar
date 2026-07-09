@@ -1,0 +1,33 @@
+{{ extends 'global/Page.html' }}
+{{ block title }}Argumentación{{ endblock }}
+
+{{ block content }}
+
+<p>
+    En la siguiente pantalla, usted tendrá cinco minutos para argumentar
+    UNA de las dos posiciones respecto a la anterior situación. 
+</p>
+<p>
+    La posición en
+    {% if group.treatment == False %}
+    las dos rondas
+    {% else %}
+    la ronda inicial
+    {% endif %}
+    de esta etapa será asignada aleatoriamente.
+</p>
+<p>
+    La otra persona con la que intercambiará argumentos será elegida al azar.
+</p>
+
+<p>
+    Después deberá valorar la calidad de las argumentaciones de otros tres participantes y los otros también valorarán su argumentación.
+</p>
+<p>
+   El pago de esta ronda estará entre 0 y 24.000 pesos, dependiendo de las valoraciones que se hagan de la calidad de su argumentación.
+   Es decir, este pago dependerá de su valoración y las valoraciones de otros tres participantes.
+</p>
+
+{{ next_button }}
+
+{{ endblock }}

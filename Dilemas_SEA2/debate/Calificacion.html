@@ -1,0 +1,207 @@
+{{ extends 'global/Page.html' }}
+
+
+{% load otree static %}
+{% block scripts %}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        formElement = document.getElementById("form");
+    });
+
+    function allowDrop(event) {
+        event.preventDefault();
+    }
+
+    function drag(event) {
+        event.dataTransfer.setData("text", event.target.id);  
+        event.dataTransfer.setData("parent", event.target.parentElement.id);  
+    }
+
+    function drop(event) {
+        event.preventDefault();
+        var draggedElementId = event.dataTransfer.getData("text"); 
+        var parentElementId = event.dataTransfer.getData("parent"); 
+        var draggedElementClass = document.getElementById(draggedElementId).className;
+        var dropTargetClass = event.target.className;
+
+        if (dropTargetClass == 'receiver_default_asignacion') {
+            if (draggedElementClass == 'option_asignacion') {
+                event.target.appendChild(document.getElementById(draggedElementId)); 
+                document.getElementById(parentElementId).style.borderColor = "#ff000077";  
+                document.getElementById(parentElementId).firstElementChild.removeAttribute("value");  
+            }
+        } else if (draggedElementClass == 'option_asignacion') {
+            if (dropTargetClass == 'asignacion') {
+                event.target.firstElementChild.value = document.getElementById(draggedElementId).textContent; 
+                event.target.appendChild(document.getElementById(draggedElementId));  
+                event.target.style.borderColor = "#ffffffff";  
+
+                if (document.getElementById(parentElementId).className == 'asignacion') {
+                    document.getElementById(parentElementId).style.borderColor = "#ff000077";  
+                    document.getElementById(parentElementId).firstElementChild.removeAttribute("value"); 
+                }
+            }
+        }
+    }
+
+    function submitForm() {
+        formElement.submit(); 
+    }
+
+    $(document).ready(function () {
+        $('input[id=efficacy]').on('input change', function () {
+            $('input[id=efficacy]').addClass('myclass');  
+        });
+    });
+</script>
+    <style>
+        .otree-btn-next {
+            display: none;
+        }
+    
+        .div_tables .options_tables{
+            width: 100%;
+        }
+    
+        .tabla {
+            margin: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+    
+        .tabla td {
+            padding: 10px 12px;
+            text-align: center;
+            border-color: #000000;
+            border-style: solid;
+            border-width: 1px;
+        }
+    
+        .option_asignacion:hover {
+            background-color: #e7e7e7;
+        }
+        .option_asignacion{
+            margin-left: 10px;
+            margin-top: 8px;
+        }
+    
+        .asignacion {
+            width: 100%;
+            border-color: #ff000077;
+            border-style: solid;
+            border-width: 1px;
+            border-radius: 10px;
+            height: 40px;
+            padding-top: 7px;
+        }
+    
+        .receiver_default_asignacion {
+            width: 100%;
+            height: 40px;
+            display: inline-flex;
+        }
+        .table-expand {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-expand th, .table-expand td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    white-space: nowrap; /* Evita que el contenido se divida en múltiples líneas */
+}
+
+.table-expand th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.table-expand td {
+    min-width: 100px; /* Ajusta este valor según tus necesidades */
+}
+    </style>
+
+{% endblock %}
+
+{{ block title }}Valoración de argumentos{{ endblock }}
+
+{{ block content }}
+
+<p>
+    Haga <b>clic</b> sobre el valor y luego <b>arrastre</b> para elegir un número entre 0 y 6000 para cada participante, teniendo en cuenta que no puede colocar el mismo valor para dos personas diferentes.
+</p>
+
+<div class="options_tables">
+    <table>
+        <tr>
+            <td style="padding-right: 10px; height: 48px;"><b>Asignación: </b></td>
+            <td style="width: 100%">
+                <div ondrop="drop(event)" ondragover="allowDrop(event)" class="receiver_default_asignacion">
+                    <span draggable="true" ondragstart="drag(event)" id="opt_prefer_01" class="option_asignacion">0</span>
+                    <span draggable="true" ondragstart="drag(event)" id="opt_prefer_02" class="option_asignacion">2000</span>
+                    <span draggable="true" ondragstart="drag(event)" id="opt_prefer_03" class="option_asignacion">4000</span>
+                    <span draggable="true" ondragstart="drag(event)" id="opt_prefer_04" class="option_asignacion">6000</span>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="div_tables">
+
+    <table class="table">
+        <tr>
+            <td class="head" style="width: 85%;">
+                <b>Persona a la que se le asignara</b>
+            </td>
+            <td style="width: 15%; text-align: center;">
+                <b>Asigne aquí:</b>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Argumentación de usted
+                <br>
+                "{{ argumento_usted }}"
+            </td>
+            <td>
+                <div name="usted" data-field="calificacion_usted"  ondrop="drop(event)" ondragover="allowDrop(event)" id="receiver_01" class="asignacion"><input type="hidden" name="calificacion_usted"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Argumentación de su pareja
+                <br>
+                "{{ argumento_pareja }}"
+            </td>
+            <td>
+                <div name="pareja" data-field="calificacion_pareja" ondrop="drop(event)" ondragover="allowDrop(event)" id="receiver_02" class="asignacion"><input type="hidden" name="calificacion_pareja"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Argumentación de la persona 1
+                <br>
+                "{{ arg_otro_afavor }}"
+            </td>
+            <td>
+                <div name="jugador_a_favor" data-field="calificacion_jugador_afavor" ondrop="drop(event)" ondragover="allowDrop(event)" id="receiver_03" class="asignacion"><input type="hidden" name="calificacion_jugador_afavor"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Argumentación de la persona 2
+                <br>
+                "{{ arg_otro_encontra }}"
+            </td>
+            <td>
+                <div name="jugador_en_contra" data-field="calificacion_jugador_encontra" ondrop="drop(event)" ondragover="allowDrop(event)" id="receiver_04" class="asignacion"><input type="hidden" name="calificacion_jugador_encontra"></div>
+            </td>
+        </tr>
+    </table>
+
+    <button type="submit" class="btn btn-primary mt-3">Siguiente</button>
+
+{{ endblock }}
+

@@ -1,0 +1,48 @@
+{{ extends 'global/Page.html' }}
+{{ block title }}Ronda 2: Usted{{ endblock }}
+
+{{ block content }}
+
+{{ if group.treatment == False }}
+<p>
+    Ahora debe escribir una respuesta a la argumentación presentada por el otro participante. La otra persona también ya leyó tu argumentación y escribirá una respuesta.
+</p>
+<p>
+    Recuerde, la pregunta es: ¿Deberían los estudiantes seguir denunciando las actividades ilegales que están contaminando la Ciénaga?
+</p>
+<p>
+    El argumento de su pareja es:
+</p>
+<p>
+    <b>{{ group.arg_a_favor }}</b>
+</p>
+<p>
+    Responda manteniendo la posición asignada: <b> {{C.CONTRA}} </b>
+</p>
+
+{{ else }}
+
+<p>
+    Ahora debe escribir un argumento tomando la otra posición. La otra persona también escribirá un argumento tomando otra posición.
+</p>
+<p>
+    Recuerde, la pregunta es: ¿Deberían los estudiantes seguir denunciando las actividades ilegales que están contaminando la Ciénaga?
+</p>
+<p>
+    El argumento de su pareja es:
+</p>
+<p>
+    <b>{{ group.arg_en_contra }}</b>
+</p>
+<p>
+    La posición que debe argumentar es: <b> {{C.CONTRA}} </b>
+</p>
+
+{{ endif }}
+{{ formfields }}
+
+<p> 
+    <i>Cuando el tiempo acabe, avanzará automáticamente.</i>
+</p>
+
+{{ endblock }}

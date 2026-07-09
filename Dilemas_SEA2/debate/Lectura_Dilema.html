@@ -1,0 +1,61 @@
+{{ extends 'global/Page.html' }}
+{{ block title }} ETAPA 1 {{ endblock }}
+
+{{ block content }}
+
+<b>Lea detenidamente la siguiente SITUACIÓN:</b>
+
+<div style="border: 2px solid #000000; padding: 20px; margin: 20px 0; background-color: #f9f9f9; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 8px;">
+    <p style="text-align: justify;">
+        Un grupo de estudiantes de un colegio cercano a la Ciénaga Grande de Santa Marta está preocupado por la contaminación del agua. Los residuos arrojados a la Ciénaga están afectando la biodiversidad y la salud de la comunidad. Al observar el aumento de enfermedades, los estudiantes están investigando este problema sanitario y han comenzado a hacer pública información sobre las actividades que contaminan la Ciénaga. Sin embargo, estas acciones comunitarias han generado un conflicto con grupos armados presentes en la región.
+    </p>
+    <p style="text-align: justify;">
+        Los grupos armados se benefician de actividades ilegales que afectan la calidad del agua. Por un lado, los estudiantes creen que su deber es proteger la salud de su comunidad y por lo tanto deben denunciar cualquier actividad que esté contaminando la Ciénaga. Por otro lado, los grupos armados han advertido a los estudiantes que no sigan involucrándose en este problema y que enfoquen sus esfuerzos en otros problemas sociales.
+    </p>
+    <p style="text-align: justify;">
+        Las amenazas de los grupos armados han llevado a los estudiantes a cuestionarse si vale la pena seguir arriesgando su vida para mejorar la salud de la comunidad alrededor de la Ciénaga. A pesar de las intimidaciones, las denuncias de los estudiantes han despertado el interés de otros miembros de la comunidad, quienes también han decidido unirse a las actividades para reducir la contaminación del agua.
+    </p>
+    <p style="text-align: justify;">
+        La contaminación del agua en la Ciénaga pone en riesgo la salud de la comunidad, pero denunciar las actividades ilegales que la causan también expone la vida de los estudiantes.
+    </p>
+</div>
+
+<b>Posición inicial:</b>
+
+
+<form method="post">
+    <!-- Campo para 'posicion' -->
+    <div>
+        <p style="margin-top: 15px;">{{ form.posicion_afin.label }}</p>
+        {{ form.posicion_afin }}
+    </div>
+    
+    <!-- Campo para 'exp_emp', inicialmente oculto -->
+    <div id="exp_emp" style="display: none; margin-top: 20px;">
+        <p>{{ form.exp_emp.label }}</p>
+        {{ form.exp_emp }}
+    </div>
+</form>
+
+<p>
+
+</p>   
+{{ next_button }}
+
+<script>
+    // Selecciona los elementos HTML necesarios
+    const posicionRadios = document.querySelectorAll('input[name="posicion_afin"]');
+    const posMayoriaDiv = document.getElementById('exp_emp');
+
+    // Añade un evento a los radio buttons de 'posicion'
+    posicionRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            // Muestra el campo 'pos_mayoria' cuando se selecciona una opción en 'posicion'
+            posMayoriaDiv.style.display = 'block';
+        });
+    });
+</script>
+
+
+
+{{ endblock }}

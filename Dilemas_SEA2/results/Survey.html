@@ -1,0 +1,88 @@
+{% extends "global/Page.html" %}
+{% load otree_tags %}
+{% block title %}
+    Encuesta
+{% endblock %}
+{{ block style}}
+<style>
+    .form-check-label{
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.td_q{
+    vertical-align: middle;
+}
+
+.center_align_head {
+        text-align: center;
+        vertical-align: middle;
+        font-size: 14px;
+        margin-bottom: 0px;
+}
+.likert-label {
+        display: block;
+        margin-bottom: 10px; /* Ajusta este valor según lo que necesites */
+}
+
+.center_align {
+        text-align: center;
+        vertical-align: middle;
+        font-size: 16px;
+}
+</style>
+{{ endblock }}
+
+{% block content %}
+
+<p>
+    Las siguientes frases preguntan acerca de tus pensamientos y sentimientos en una variedad de situaciones. 
+</p>
+
+<p>
+    <h4> 
+        ¿Qué tan bien lo(a) describe a usted cada una de las siguientes afirmaciones?
+    </h4> 
+</p>
+
+<p>
+    Lea cada expresión cuidadosamente antes de responder y marca un círculo frente a cada afirmación para elegir su respuesta.
+</p>
+
+<form method="post">
+    <table>
+        <thead>
+            <tr>
+                <th>Pregunta</th>
+                <th class="center_align_head">No me describe bien
+                    <p class="center_align_head">1</p>
+                </th>
+                <th class="center_align_head">Me describe un poco
+                    <p class="center_align_head">2</p>
+                </th>
+                <th class="center_align_head">Me describe bien
+                    <p class="center_align_head">3</p>
+                </th>
+                <th class="center_align_head">Me describe bastante bien
+                    <p class="center_align_head">4</p>
+                </th>
+                <th class="center_align_head">Me describe muy bien
+                    <p class="center_align_head">5</p>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for field in form %}
+            <tr>
+                <td> <span class="likert-label">{{ field.label }}</span></td>
+                {% for choice in field %}
+                <td class="center_align">{{ choice }} </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <input type="submit" value="Continuar">
+</form>
+{% endblock %}

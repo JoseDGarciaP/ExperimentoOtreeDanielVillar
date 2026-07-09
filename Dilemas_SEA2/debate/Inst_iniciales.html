@@ -1,0 +1,31 @@
+{{ extends 'global/Page.html' }}
+{{ block title }}Instrucciones generales{{ endblock }}
+
+{{ block content }}
+
+<p>
+    Esta actividad consta de 2 etapas y una encuesta:
+</p>
+<ul>
+    <li> <b>Etapa 1:</b> Se le presentará una situación sobre la que hay dos posiciones: <b>A FAVOR DE DENUNCIAR</b> y <b>EN CONTRA DE DENUNCIAR</b>.  Usted será emparejado con otra persona al azar y deberá argumentar 
+        {% if group.treatment == False %}
+        UNA de las dos
+        {% else %}
+        las DOS
+        {% endif %} 
+        posiciones, valorar la calidad de cuatro argumentaciones y distribuir 12.000 pesos en función de su calidad.
+        Su pareja y otras personas también van a valorar su argumentación.
+    </li>
+    
+    <li> <b>Etapa 2:</b> Participará en una actividad con 4 situaciones diferentes que implica posibles pagos para usted y para otra persona. Una de las situaciones será seleccionada al azar para determinar sus pagos y los de la otra persona.
+    </li>
+    
+</ul>
+<p>
+    Antes de cada etapa aparecerá una página de instrucciones adicionales. 
+</p>
+
+{{ next_button }}
+
+{{ endblock }}
+ 

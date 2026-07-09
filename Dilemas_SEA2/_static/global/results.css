@@ -1,0 +1,22 @@
+/* Archivo: static/style.css */
+
+.start-button {
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.start-button:hover {
+    background-color: #2980b9;
+}
+
+.body {
+    font-size: 1.8em; /* Puedes ajustar el valor para cambiar el tamaño de la fuente */
+}
+
+/* static/results.css */

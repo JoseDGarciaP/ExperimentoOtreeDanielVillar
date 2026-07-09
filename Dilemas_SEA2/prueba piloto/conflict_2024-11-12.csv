@@ -1,0 +1,49 @@
+﻿participant.id_in_session;participant.code;participant.label;participant._is_bot;participant._index_in_pages;participant._max_page_index;participant._current_app_name;participant._current_page_name;participant.time_started_utc;participant.visited;participant.mturk_worker_id;participant.mturk_assignment_id;participant.payoff;player.id_in_group;player.role;player.payoff;player.cooperate;player.descrip_cooperate;group.id_in_subsession;group.levels;group.selected_round;subsession.round_number;session.code;session.label;session.mturk_HITId;session.mturk_HITGroupId;session.comment;session.is_demo
+1;i0g0hve8;;0;39;39;results;Final;2024-11-08 18:05:35.472990;1;;;56000.0;1;;16000.0;1;;1;1,0,2,3;2;1;k1hxkkab;;;;;0
+2;3gfleihj;;0;39;39;results;Final;2024-11-08 18:05:35.490150;1;;;64000.0;2;;16000.0;1;;1;1,0,2,3;2;1;k1hxkkab;;;;;0
+3;sc8lbs96;;0;39;39;results;Final;2024-11-08 18:05:35.500255;1;;;64000.0;1;;16000.0;1;;2;2,1,3,0;4;1;k1hxkkab;;;;;0
+4;tozx4h6f;;0;39;39;results;Final;2024-11-08 18:05:35.511386;1;;;64000.0;2;;16000.0;1;;2;2,1,3,0;4;1;k1hxkkab;;;;;0
+5;t38ifg4p;;0;39;39;results;Final;2024-11-08 18:05:35.518061;1;;;64000.0;1;;16000.0;1;;3;2,1,0,3;2;1;k1hxkkab;;;;;0
+6;vdz27tkv;;0;39;39;results;Final;2024-11-08 18:05:35.525780;1;;;64000.0;2;;16000.0;1;;3;2,1,0,3;2;1;k1hxkkab;;;;;0
+7;2av5nbe5;;0;39;39;results;Final;2024-11-08 18:05:35.549595;1;;;48000.0;1;;8000.0;0;;4;3,0,2,1;3;1;k1hxkkab;;;;;0
+8;akn7tcv5;;0;39;39;results;Final;2024-11-08 18:05:35.687425;1;;;64000.0;2;;8000.0;1;;4;3,0,2,1;3;1;k1hxkkab;;;;;0
+9;fewonbrz;;0;39;39;results;Final;2024-11-08 18:05:35.716452;1;;;80000.0;1;;16000.0;1;;5;0,1,3,2;4;1;k1hxkkab;;;;;0
+10;cqd95f9g;;0;39;39;results;Final;2024-11-08 18:05:35.708030;1;;;40000.0;2;;16000.0;1;;5;0,1,3,2;4;1;k1hxkkab;;;;;0
+11;ab0ukpg2;;0;39;39;results;Final;2024-11-08 18:05:35.743446;1;;;72000.0;1;;16000.0;1;;6;0,1,2,3;1;1;k1hxkkab;;;;;0
+12;ixp6t6rj;;0;39;39;results;Final;2024-11-08 18:05:35.807287;1;;;56000.0;2;;16000.0;1;;6;0,1,2,3;1;1;k1hxkkab;;;;;0
+1;i0g0hve8;;0;39;39;results;Final;2024-11-08 18:05:35.472990;1;;;56000.0;1;;16000.0;1;;1;0,3,1,2;3;2;k1hxkkab;;;;;0
+2;3gfleihj;;0;39;39;results;Final;2024-11-08 18:05:35.490150;1;;;64000.0;2;;16000.0;1;;1;0,3,1,2;3;2;k1hxkkab;;;;;0
+3;sc8lbs96;;0;39;39;results;Final;2024-11-08 18:05:35.500255;1;;;64000.0;1;;16000.0;1;;2;3,0,2,1;1;2;k1hxkkab;;;;;0
+4;tozx4h6f;;0;39;39;results;Final;2024-11-08 18:05:35.511386;1;;;64000.0;2;;16000.0;1;;2;3,0,2,1;1;2;k1hxkkab;;;;;0
+5;t38ifg4p;;0;39;39;results;Final;2024-11-08 18:05:35.518061;1;;;64000.0;1;;16000.0;1;;3;0,2,3,1;4;2;k1hxkkab;;;;;0
+6;vdz27tkv;;0;39;39;results;Final;2024-11-08 18:05:35.525780;1;;;64000.0;2;;16000.0;1;;3;0,2,3,1;4;2;k1hxkkab;;;;;0
+7;2av5nbe5;;0;39;39;results;Final;2024-11-08 18:05:35.549595;1;;;48000.0;1;;16000.0;1;;4;3,0,1,2;4;2;k1hxkkab;;;;;0
+8;akn7tcv5;;0;39;39;results;Final;2024-11-08 18:05:35.687425;1;;;64000.0;2;;16000.0;1;;4;3,0,1,2;4;2;k1hxkkab;;;;;0
+9;fewonbrz;;0;39;39;results;Final;2024-11-08 18:05:35.716452;1;;;80000.0;1;;16000.0;1;;5;2,0,1,3;2;2;k1hxkkab;;;;;0
+10;cqd95f9g;;0;39;39;results;Final;2024-11-08 18:05:35.708030;1;;;40000.0;2;;16000.0;1;;5;2,0,1,3;2;2;k1hxkkab;;;;;0
+11;ab0ukpg2;;0;39;39;results;Final;2024-11-08 18:05:35.743446;1;;;72000.0;1;;16000.0;1;;6;1,3,2,0;3;2;k1hxkkab;;;;;0
+12;ixp6t6rj;;0;39;39;results;Final;2024-11-08 18:05:35.807287;1;;;56000.0;2;;16000.0;1;;6;1,3,2,0;3;2;k1hxkkab;;;;;0
+1;i0g0hve8;;0;39;39;results;Final;2024-11-08 18:05:35.472990;1;;;56000.0;1;;24000.0;0;;1;1,3,2,0;2;3;k1hxkkab;;;;;0
+2;3gfleihj;;0;39;39;results;Final;2024-11-08 18:05:35.490150;1;;;64000.0;2;;8000.0;1;;1;1,3,2,0;2;3;k1hxkkab;;;;;0
+3;sc8lbs96;;0;39;39;results;Final;2024-11-08 18:05:35.500255;1;;;64000.0;1;;16000.0;1;;2;0,2,3,1;1;3;k1hxkkab;;;;;0
+4;tozx4h6f;;0;39;39;results;Final;2024-11-08 18:05:35.511386;1;;;64000.0;2;;16000.0;1;;2;0,2,3,1;1;3;k1hxkkab;;;;;0
+5;t38ifg4p;;0;39;39;results;Final;2024-11-08 18:05:35.518061;1;;;64000.0;1;;16000.0;1;;3;3,2,1,0;1;3;k1hxkkab;;;;;0
+6;vdz27tkv;;0;39;39;results;Final;2024-11-08 18:05:35.525780;1;;;64000.0;2;;16000.0;1;;3;3,2,1,0;1;3;k1hxkkab;;;;;0
+7;2av5nbe5;;0;39;39;results;Final;2024-11-08 18:05:35.549595;1;;;48000.0;1;;8000.0;1;;4;2,3,0,1;2;3;k1hxkkab;;;;;0
+8;akn7tcv5;;0;39;39;results;Final;2024-11-08 18:05:35.687425;1;;;64000.0;2;;24000.0;0;;4;2,3,0,1;2;3;k1hxkkab;;;;;0
+9;fewonbrz;;0;39;39;results;Final;2024-11-08 18:05:35.716452;1;;;80000.0;1;;24000.0;0;;5;0,3,1,2;2;3;k1hxkkab;;;;;0
+10;cqd95f9g;;0;39;39;results;Final;2024-11-08 18:05:35.708030;1;;;40000.0;2;;8000.0;1;;5;0,3,1,2;2;3;k1hxkkab;;;;;0
+11;ab0ukpg2;;0;39;39;results;Final;2024-11-08 18:05:35.743446;1;;;72000.0;1;;24000.0;0;;6;1,0,3,2;2;3;k1hxkkab;;;;;0
+12;ixp6t6rj;;0;39;39;results;Final;2024-11-08 18:05:35.807287;1;;;56000.0;2;;8000.0;1;;6;1,0,3,2;2;3;k1hxkkab;;;;;0
+1;i0g0hve8;;0;39;39;results;Final;2024-11-08 18:05:35.472990;1;;;56000.0;1;;0.0;1;De acuerdo a las guanacias, aunque al principio no entendí, pero después de leer lo de nuevo entendí. La persona con quien me toco nunca escribió nada, por lo que la toma de decisiones era muy monotoma, y pues lo mejor era que nos fuera bien a ambos, pero como no sé que fue lo que esa persona selecciono. Una la seleccione con la opción b por no querer perder.   Si esa persona hubiera escrito, hubiese tomado mejores decisiones para ambos;1;2,3,1,0;4;4;k1hxkkab;;;;;0
+2;3gfleihj;;0;39;39;results;Final;2024-11-08 18:05:35.490150;1;;;64000.0;2;;24000.0;0;La opción B me da siempre una certeza de ganancia, la opción A no  ;1;2,3,1,0;4;4;k1hxkkab;;;;;0
+3;sc8lbs96;;0;39;39;results;Final;2024-11-08 18:05:35.500255;1;;;64000.0;1;;16000.0;1;en realidad me base en el beneficio  y riesgo que me ofrecian ambas opciones,;2;2,1,0,3;2;4;k1hxkkab;;;;;0
+4;tozx4h6f;;0;39;39;results;Final;2024-11-08 18:05:35.511386;1;;;64000.0;2;;16000.0;1;Lllegamos a un acuerdo de elegir A;2;2,1,0,3;2;4;k1hxkkab;;;;;0
+5;t38ifg4p;;0;39;39;results;Final;2024-11-08 18:05:35.518061;1;;;64000.0;1;;16000.0;1;Todo el tiempo opte por la opciòn de la A, por lo que mi pareja y yo nos dimos todo el tiempo el voto de confianza, ya que ambos queriamos ganar, pero que el otro no saliera afectado.;3;0,2,3,1;2;4;k1hxkkab;;;;;0
+6;vdz27tkv;;0;39;39;results;Final;2024-11-08 18:05:35.525780;1;;;64000.0;2;;16000.0;1;Con mi compañero charlamos y consideramos que en cada opción era más ideal ambos elegir A buscando ganar el mismo dinero porque de uno traicionar y elegir la otra opción, podría hacer que el otro ganara nada o muy poco. Espero de todo corazón que mi compañero haya trabajado con la misma honestidad que yo.;3;0,2,3,1;2;4;k1hxkkab;;;;;0
+7;2av5nbe5;;0;39;39;results;Final;2024-11-08 18:05:35.549595;1;;;48000.0;1;;16000.0;1;Al elegir pensé en el otro compañero, es decir, si yo quería ganar algo de dinero, mi compañero también. ;4;2,1,0,3;2;4;k1hxkkab;;;;;0
+8;akn7tcv5;;0;39;39;results;Final;2024-11-08 18:05:35.687425;1;;;64000.0;2;;16000.0;1;Escogí la opción A, ya que nos permite ganar a ambos participantes. ;4;2,1,0,3;2;4;k1hxkkab;;;;;0
+9;fewonbrz;;0;39;39;results;Final;2024-11-08 18:05:35.716452;1;;;80000.0;1;;24000.0;0;De la manera mas equitativa ;5;0,1,3,2;4;4;k1hxkkab;;;;;0
+10;cqd95f9g;;0;39;39;results;Final;2024-11-08 18:05:35.708030;1;;;40000.0;2;;0.0;1;yo elegí la opción a en todas las situaciones, porque era la que mas beneficio tenia, hable con mi pareja y no me contesto, pero la elegí con base al beneficio que esta tenia ;5;0,1,3,2;4;4;k1hxkkab;;;;;0
+11;ab0ukpg2;;0;39;39;results;Final;2024-11-08 18:05:35.743446;1;;;72000.0;1;;16000.0;1;Teniendo en cuenta que los dos tuvieramos un beneficio, sin embargo, arriesgandome a que el otro cambie de opinion;6;3,0,2,1;2;4;k1hxkkab;;;;;0
+12;ixp6t6rj;;0;39;39;results;Final;2024-11-08 18:05:35.807287;1;;;56000.0;2;;16000.0;1;Elegí conforme el trabajo en equipo, que los dos ganáramos lo mismo, siendo así más justos y sin buscar ventaja. ;6;3,0,2,1;2;4;k1hxkkab;;;;;0

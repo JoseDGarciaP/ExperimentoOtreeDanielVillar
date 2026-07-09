@@ -1,0 +1,66 @@
+{{ extends 'global/Page.html' }} 
+
+{{ block title }} Consentimiento Informado {{ endblock }} 
+
+{{block content }}
+
+<p>
+    Este documento de consentimiento informado está dirigido a estudiantes
+    universitarios. Por favor lea cuidadosamente la información sobre el estudio
+    de investigación. Siéntase en completa libertad de preguntar a los monitores
+    todo aquello que no entienda. Una vez haya comprendido la información, podrá
+    decidir entre continuar en la actividad o retirarse de la sala.
+</p>
+
+<p>
+    Su participación en esta actividad es totalmente voluntaria. Usted puede
+    retirarse en cualquier momento. Si decide retirarse de la sala, su información
+    no se será tenida en cuenta y eso no afectará la posibilidad de participar en
+    futuras actividades del Laboratorio. Sin embargo, si decide retirarse antes de
+    que la actividad termine, usted no recibirá ninguna ganancia. Usted también
+    podrá ser retirado de la actividad si luego de un segundo llamado de atención
+    por estar realizando otras actividades, no continúa con las tareas indicadas.
+    En este caso tampoco recibirá ninguna ganancia.
+</p>
+
+<p>
+    El estudio tendrá una duración máxima de 60 minutos. Los recursos con los que
+    se financia este estudio provienen de la Dirección de investigación de la
+    Universidad del Rosario. El monto mínimo que recibirá por completar toda la
+    actividad es de 10.000 pesos y podrá recibir ganancias adicionales dependiendo
+    de sus decisiones y las de otros participantes.
+</p>
+
+<p>
+    La información (decisiones y ganancias) recolectada en esta actividad la
+    utilizarán los investigadores del proyecto de manera confidencial y con fines
+    académicos. Ninguna instancia administrativa o académica de la Universidad
+    tendrá acceso a su información personal. Tras conocer sus ganancias usted debe
+    diligenciar un cuestionario de pago con sus datos personales (nombre,
+    documento de identidad y cuenta bancaria). Transferiremos sus ganancias en los
+    siguientes 3 días hábiles, una vez contemos con la información de su cuenta.
+    Su información bancaria será borrada una vez se realice su pago.
+</p>
+
+<p>
+    Este experimento no contempla riesgos asociados a su integridad física, mental
+    y/o emocional. Si desea una copia de este consentimiento informado o si en
+    algún momento desea obtener información adicional sobre el estudio, puede
+    escribir al correo <a href="mailto:rebel@urosario.edu.co">rebel@urosario.edu.co</a>
+</p>
+
+<p>
+    Por medio del presente expreso que he leído o me ha sido leído completamente
+    el documento de consentimiento informado, se me han aclarado las dudas y
+    acepto participar voluntariamente en la investigación. Entiendo que tengo el
+    derecho de retirarme de la investigación en cualquier momento sin que afecte
+    de ninguna manera mi relación con el laboratorio, pero sin recibir pago
+    alguno.
+</p>
+
+{{formfield player.consentimiento }} 
+<br>
+
+{{ next_button }} 
+
+{{ endblock }}

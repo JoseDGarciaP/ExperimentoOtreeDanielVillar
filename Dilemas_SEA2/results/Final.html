@@ -1,0 +1,40 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Muchas gracias por participar.
+{% endblock %}
+
+{% block content %}
+
+<p>
+    <b>Por favor lea cuidadosamente la información en esta página 
+    y siga correctamente las instrucciones al final de la misma.</b>
+</p>
+<P>
+    Su ganancia por su respuesta sobre la aprobación social de la prohibición fue: {{ pago_aprobacion_social }}
+</P>
+<p>
+    Su ganancia por la calificación recibida de la argumentación en la Etapa 1: {{pago_cal_usted}}
+</p>
+<p> 
+    La ronda elegida al azar para calcular sus ganancias en la Etapa 2 es: Ronda {{ selected_round }}. Usted ganó {{ final_payoff }} en esa ronda. </p>
+<p>
+    Por lo tanto, su ganancia total es <b>{{payoff_complete}}</b>.  
+</p>
+<p>Tenga en cuenta que sus ganancias se transferirán de forma electrónica 
+    en un lapso de 48 horas hábiles a partir del momento en que diligencie correctamente el formulario de pago.
+</p>
+
+<p><b>Instrucciones formulario de pago</b></p>
+<p> <b>1.</b>. Copie (Ctrl + C) el siguiente código:</p>
+
+<h3 class="text-center text-danger mx-auto d-block w-25 border border-4">{{ participant.code }}</h3><br>
+
+<p><b>2.</b> Haga <i>clic</i> sobre el vínculo mostrado debajo para acceder al "Formulario de Pagos". Una vez allí, pegue el código en la pregunta que lo solicita y termine de diligenciar el formulario. </p>
+
+<p><a role="button" href="https://docs.google.com/forms/d/e/1FAIpQLSd_LmO-qZI4kFFgbsNFjog_brIEUmWH_BAOmaw4DHCj6BZJjA/viewform"  target="_blank" class="btn btn-info mx-auto d-block w-25">Formulario de Pagos</a></p>
+
+<p>Gracias</p>
+
+{% endblock %}

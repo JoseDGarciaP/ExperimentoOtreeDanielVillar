@@ -1,0 +1,62 @@
+{{ block title }} Situación {{ level_number }}
+{{ endblock }}
+{{ block style}}
+<style>
+    th, td {
+        text-align: center;
+        vertical-align: middle; 
+    }
+
+    .cell-a, .cell-b, .cell-usted {
+        width: 70px;
+    }
+
+</style>
+{{ endblock }}
+
+{{ block content }}
+
+    <div class="form-group required">
+        <p>En la siguiente tabla, por favor elija entre A o B presionando el botón <span style="color:blue">azul</span> que corresponda. Sus ganancias dependerán de las opciones que usted y la otra persona elijan:  </p>
+        <nav>
+            <ul>
+                <li>Si ambos eligen A, cada uno recibirá 16.000 pesos. </li>
+                <li>Si ambos eligen B, cada uno recibirá 4.000 pesos.  </li>
+                <li>Si uno elige A y el otro B, el participante que elige A recibirá {{y_value}}, y quien elija B recibirá {{x_value}}. </li>
+            </ul>
+        </nav>
+        <p>
+            Su pago en cada caso está señalado en <span style="color:blue">azul</span>. Tome su decisión:
+        </p>
+
+        <table class="table table-bordered text-center" style="width: auto; margin: auto">
+            <tr>
+                <th colspan=2 rowspan=2></th>
+                <th colspan=2>Pareja</th>
+
+            </tr>
+            <tr>
+                <th>A</th>
+                <th>B</th>
+
+            </tr>
+            <tr>
+                <th rowspan="2"><span>Usted</span></th>
+                <td><button name="cooperate" value="True" class="btn btn-primary btn-large">A</button></td>
+                <td><br>[<span style="color:blue"><b>16000</b></span>, 16000]</td>
+                <td><br>[<span style="color:blue"><b>{{y_value}}</b></span>, {{x_value}}]</td>
+            </tr>
+            <tr>
+                <td><button name="cooperate" value="False" class="btn btn-primary btn-large" >B</button></td>
+                <td><br>[<span style="color:blue"><b>{{x_value}}</b></span>, {{y_value}}]</td>
+                <td><br>[<span style="color:blue"><b>4000</b></span>, 4000]</td>
+
+            </tr>
+        </table>
+
+        <p>Usted puede hablar con su pareja aquí.</p>
+
+        {{ chat nickname=my_nickname }}
+    </div>
+
+{{ endblock }}

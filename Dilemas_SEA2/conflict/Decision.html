@@ -1,3 +1,5 @@
+{{ extends 'global/Page.html' }}
+
 {{ block title }} Situación {{ level_number }}
 {{ endblock }}
 {{ block style}}
@@ -22,7 +24,7 @@
             <ul>
                 <li>Si ambos eligen A, cada uno recibirá 16.000 pesos. </li>
                 <li>Si ambos eligen B, cada uno recibirá 4.000 pesos.  </li>
-                <li>Si uno elige A y el otro B, el participante que elige A recibirá {{y_value}}, y quien elija B recibirá {{x_value}}. </li>
+                <li>Si uno elige A y el otro B, el participante que elige A recibirá {{x_value}}, y quien elija B recibirá {{y_value}}. </li>
             </ul>
         </nav>
         <p>
@@ -44,17 +46,17 @@
                 <th rowspan="2"><span>Usted</span></th>
                 <td><button name="cooperate" value="True" class="btn btn-primary btn-large">A</button></td>
                 <td><br>[<span style="color:blue"><b>16000</b></span>, 16000]</td>
-                <td><br>[<span style="color:blue"><b>{{y_value}}</b></span>, {{x_value}}]</td>
+                <td><br>[<span style="color:blue"><b>{{x_value}}</b></span>, {{y_value}}]</td>
             </tr>
             <tr>
                 <td><button name="cooperate" value="False" class="btn btn-primary btn-large" >B</button></td>
-                <td><br>[<span style="color:blue"><b>{{x_value}}</b></span>, {{y_value}}]</td>
+                <td><br>[<span style="color:blue"><b>{{y_value}}</b></span>, {{x_value}}]</td>
                 <td><br>[<span style="color:blue"><b>4000</b></span>, 4000]</td>
 
             </tr>
         </table>
 
-        <p>Usted puede hablar con su pareja aquí.</p>
+        <p>Usted puede hablar con su pareja aquí:</p>
 
         {{ chat nickname=my_nickname }}
     </div>

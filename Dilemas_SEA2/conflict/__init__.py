@@ -8,8 +8,9 @@ class C(BaseConstants):
     
     MUTUAL_COOPERATE = 16000
     MUTUAL_DEFECT = 4000
-    X_VALUES = [8000, 8000, 24000, 24000]
-    Y_VALUES = [8000, 0, 8000, 0]
+    # Según las instrucciones: quien elige A recibe X y quien elige B recibe Y.
+    X_VALUES = [8000, 0, 8000, 0]        # pago para quien elige A
+    Y_VALUES = [8000, 8000, 24000, 24000]  # pago para quien elige B
     ORDER = [0, 1, 2, 3]
 
 class Subsession(BaseSubsession):
@@ -37,18 +38,22 @@ def set_payoffs(group: Group):
         for p in group.get_players():
             set_payoff(p)
 
+def get_level_index(player: Player):
+    """Situación que realmente se le mostró al jugador en esta ronda."""
+    levels = player.participant.vars.get('levels', player.group.levels)
+    return int(levels.split(",")[player.round_number - 1])
+
 def get_payoff_for_round(player: Player, other_player_choice: bool):
-    round_number = player.round_number
-    level_index = round_number - 1 
-    
+    level_index = get_level_index(player)
+
     if player.cooperate and other_player_choice:
         return C.MUTUAL_COOPERATE
     elif not player.cooperate and not other_player_choice:
         return C.MUTUAL_DEFECT
     elif player.cooperate and not other_player_choice:
-        return C.Y_VALUES[level_index]
-    else:
         return C.X_VALUES[level_index]
+    else:
+        return C.Y_VALUES[level_index]
 
 def other_player(player: Player):
     return player.get_others_in_group()[0]
@@ -73,10 +78,7 @@ class Decision(Page):
 
     @staticmethod
     def vars_for_template(player: Player):
-        level = player.participant.vars['levels']
-        level = level.split(",")
-        level = level[player.round_number - 1]
-        level = int(level)
+        level = get_level_index(player)
         return {
             'level_number': player.round_number,
             'x_value': C.X_VALUES[level],

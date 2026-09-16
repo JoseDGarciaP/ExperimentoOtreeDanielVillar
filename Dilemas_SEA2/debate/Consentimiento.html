@@ -83,14 +83,19 @@
 </p>
 
 <p>
-    He leído y entendido la información contenida en este documento; por lo tanto,
-    voluntariamente acepto participar en esta investigación.
+    Yo, {{ formfield player.nombre_participante label="" }}, identificado/a con documento
+    de identidad número {{ formfield player.documento_participante label="" }} he leído y
+    entendido la información contenida en este documento; por lo tanto, voluntariamente
+    acepto participar en esta investigación.
+    Firma: {{ formfield player.firma_participante label="" }},
+    Fecha: {{ formfield player.fecha_participante label="" }},
+    Teléfono: {{ formfield player.telefono_participante label="" }},
 </p>
 
 <p>
     Yo, Mileth Xiomara Rincón Ramírez, coordinadora de campo del proyecto,
-    certifico que la información será recogida de manera confidencial. C.C.
-    1234338768 de Floridablanca. Teléfono 3224498344.
+    certifico que la información será recogida de manera confidencial. Firmado,
+    __________________, C.C. 1234338768 de Floridablanca. Teléfono 3224498344.
 </p>
 
 {{formfield player.consentimiento }} 

@@ -33,10 +33,17 @@ class Player(BasePlayer):
     
     consentimiento = models.BooleanField(
         choices=[
-            [True, 'Sí acepto participar.'], 
+            [True, 'Sí acepto participar.'],
             [False, 'No acepto participar.']
             ],
         label='¿Aceptar términos?', widget=widgets.RadioSelect)
+
+    # Bloque de firma del asentimiento informado (Pantalla 2 del documento)
+    nombre_participante = models.StringField(label='', blank=True)
+    documento_participante = models.StringField(label='', blank=True)
+    firma_participante = models.StringField(label='', blank=True)
+    fecha_participante = models.StringField(label='', blank=True)
+    telefono_participante = models.StringField(label='', blank=True)
     
     posicion_afin = models.BooleanField(
         choices=[[True, 'A favor'], [False, 'En contra']],
@@ -145,9 +152,18 @@ def set_calcular_moda_global(self:Subsession):
 class Bienvenida(Page):
     pass
 
+def minimo_cinco_palabras(texto):
+    """Valida la regla anunciada en pantalla: mínimo 5 palabras."""
+    if texto is None or len(texto.split()) < 5:
+        return "Debe escribir como mínimo 5 palabras."
+
+
 class Consentimiento(Page):
     form_model = 'player'
-    form_fields = ['consentimiento']
+    form_fields = [
+        'nombre_participante', 'documento_participante', 'firma_participante',
+        'fecha_participante', 'telefono_participante', 'consentimiento',
+    ]
     @staticmethod
     # Método para personalizar el flujo de avance
     def before_next_page(self:Player, timeout_happened):
@@ -167,8 +183,16 @@ class Inst_iniciales(Page):
 
 class Lectura_Dilema(Page):
     form_model = 'player'
-    form_fields = ['posicion_afin', 'exp_emp']
-    
+    form_fields = ['posicion_afin']
+
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.consentimiento
+
+class Exp_emp(Page):
+    form_model = 'player'
+    form_fields = ['exp_emp']
+
     @staticmethod
     def is_displayed(player: Player):
         return player.consentimiento
@@ -188,7 +212,11 @@ class Afavor(Page):
     @staticmethod
     def is_displayed(player: Player):
         return player.consentimiento and player.agree == 1
-    
+
+    @staticmethod
+    def error_message(player: Player, values):
+        return minimo_cinco_palabras(values['arg_a_favor'])
+
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
         player.participant.vars['argumento_a_favor'] = player.group.arg_a_favor
@@ -201,7 +229,11 @@ class Encontra(Page):
     @staticmethod
     def is_displayed(player: Player):
         return player.consentimiento and player.agree == 0
-    
+
+    @staticmethod
+    def error_message(player: Player, values):
+        return minimo_cinco_palabras(values['arg_en_contra'])
+
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
         player.participant.vars['argumento_en_contra'] = player.group.arg_en_contra
@@ -234,6 +266,10 @@ class Replica_afavor(Page):
         else:
             return False
 
+    @staticmethod
+    def error_message(player: Player, values):
+        return minimo_cinco_palabras(values['rep_a_favor'])
+
 class Replica_encontra(Page):
     form_model = 'group'
     form_fields = ['rep_en_contra']
@@ -248,6 +284,10 @@ class Replica_encontra(Page):
             return True
         else:
             return False
+
+    @staticmethod
+    def error_message(player: Player, values):
+        return minimo_cinco_palabras(values['rep_en_contra'])
 
 class WaitForPostura2(WaitPage):
     
@@ -360,8 +400,9 @@ page_sequence = [
     Bienvenida, 
     Consentimiento, 
     Inst_iniciales, 
-    Lectura_Dilema, 
-    Inicio_debate, 
+    Lectura_Dilema,
+    Exp_emp,
+    Inicio_debate,
     Afavor,
     Encontra, 
     WaitForPostura, 

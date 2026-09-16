@@ -282,6 +282,16 @@ class Player(BasePlayer):
     patience = models.IntegerField(widget=widgets.RadioSelect,
                                         choices=[1, 2, 3, 4, 5]
     )
+    # Escalera de Cantril y autoevaluación en matemáticas (Pantalla 22 del documento)
+    cantril_now = models.IntegerField(widget=widgets.RadioSelect,
+                                        choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    )
+    cantril_5y = models.IntegerField(widget=widgets.RadioSelect,
+                                        choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    )
+    math_self = models.IntegerField(widget=widgets.RadioSelect,
+                                        choices=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    )
     punish_justice = models.IntegerField(
         choices=[[4, "Mucho"],
                 [3, "Algo"],
@@ -317,8 +327,8 @@ class Survey(Page):
 class Survey_2(Page):
     form_model = 'player'
     form_fields = ["age", "gender_sex", "major", "semester", "stratum", "experiments", "income",
-                    "mother_educ", "father_educ", "income_stair", "risk_measure", "G_trust", 
-                    "patience", "punish_justice"
+                    "mother_educ", "father_educ", "income_stair", "cantril_now", "cantril_5y",
+                    "risk_measure", "G_trust", "math_self", "patience", "punish_justice"
     ]
     
     def before_next_page(player:Player, timeout_happened):
@@ -338,6 +348,7 @@ class Final(Page):
         selected_round = player.participant.vars.get('selected_round', 0)
         payoff_complete = player.payoff_complete
         return{
+            'showfee': C.SHOWFEE,
             'pago_aprobacion_social': pago_aprobacion_social,
             'pago_cal_usted':pago_cal_usted,
             'final_payoff':final_payoff,

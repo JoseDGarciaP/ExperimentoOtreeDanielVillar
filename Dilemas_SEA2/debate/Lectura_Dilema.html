@@ -1,5 +1,5 @@
 {{ extends 'global/Page.html' }}
-{{ block title }} ETAPA 1 {{ endblock }}
+{{ block title }} Etapa 1 {{ endblock }}
 
 {{ block content }}
 
@@ -22,40 +22,8 @@
 
 <b>Posición inicial:</b>
 
+{{ formfields }}
 
-<form method="post">
-    <!-- Campo para 'posicion' -->
-    <div>
-        <p style="margin-top: 15px;">{{ form.posicion_afin.label }}</p>
-        {{ form.posicion_afin }}
-    </div>
-    
-    <!-- Campo para 'exp_emp', inicialmente oculto -->
-    <div id="exp_emp" style="display: none; margin-top: 20px;">
-        <p>{{ form.exp_emp.label }}</p>
-        {{ form.exp_emp }}
-    </div>
-</form>
-
-<p>
-
-</p>   
 {{ next_button }}
-
-<script>
-    // Selecciona los elementos HTML necesarios
-    const posicionRadios = document.querySelectorAll('input[name="posicion_afin"]');
-    const posMayoriaDiv = document.getElementById('exp_emp');
-
-    // Añade un evento a los radio buttons de 'posicion'
-    posicionRadios.forEach(radio => {
-        radio.addEventListener('change', function() {
-            // Muestra el campo 'pos_mayoria' cuando se selecciona una opción en 'posicion'
-            posMayoriaDiv.style.display = 'block';
-        });
-    });
-</script>
-
-
 
 {{ endblock }}

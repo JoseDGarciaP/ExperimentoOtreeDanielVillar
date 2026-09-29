@@ -28,8 +28,9 @@
             </ul>
         </nav>
         <p>
-            Su pago en cada caso está señalado en <span style="color:blue">azul</span>. Tome su decisión:
+            Su pago en cada caso está señalado en <span style="color:blue">azul</span>.
         </p>
+        <p> <b>Decisión:</b></p>
 
         <table class="table table-bordered text-center" style="width: auto; margin: auto">
             <tr>
@@ -55,10 +56,35 @@
 
             </tr>
         </table>
+        <br>
+        <p><b>Preguntas: </b></p>
 
-        <p>Usted puede hablar con su pareja aquí:</p>
+        {{ formfield 'cooperate_partner' }}
 
-        {{ chat nickname=my_nickname }}
+        <div style="margin-top:25px;">
+            <label for="cooperate_accuracy">{{ form.cooperate_accuracy.label }}</label>
+
+            <div style="display:flex; align-items:center; gap:12px; margin:15px 0;">
+                <span><strong>0</strong></span>
+                <input type="range" name="cooperate_accuracy" id="cooperate_accuracy"
+                    min="0" max="100" step="1" value="50" style="flex:1;">
+                <span><strong>100</strong></span>
+            </div>
+
+            <p style="text-align:center;">Seguridad: <strong id="accuracy-actual">50</strong></p>
+            {{ formfield_errors 'cooperate_accuracy' }}
+        </div>
+
+
     </div>
+
+    <br>
+    {{ next_button 'Siguiente' }}
+
+    <script>
+        const s = document.getElementById('cooperate_accuracy');
+        const out = document.getElementById('accuracy-actual');
+        s.addEventListener('input', () => out.textContent = s.value);
+    </script>
 
 {{ endblock }}

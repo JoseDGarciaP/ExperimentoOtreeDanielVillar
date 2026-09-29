@@ -27,6 +27,13 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect,
     )
     descrip_cooperate = models.LongStringField(label='Describa cómo eligió entre la Opción A y la Opción B')
+    cooperate_partner = models.BooleanField(
+        choices=[[True, 'A'], [False, 'B']],
+        doc="""Other decision""",
+        widget=widgets.RadioSelect,
+        label='¿Qué crees que eligió el otro participante?'
+    )
+    cooperate_accuracy = models.IntegerField(min=0, max=100, label='¿Qué tan seguro está?')
 
 def creating_session(self):
     for group in self.get_groups():
@@ -74,7 +81,7 @@ class Introduction(Page):
 
 class Decision(Page):
     form_model = 'player'
-    form_fields = ['cooperate']
+    form_fields = ['cooperate', 'cooperate_partner', 'cooperate_accuracy']
 
     @staticmethod
     def vars_for_template(player: Player):

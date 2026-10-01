@@ -1,0 +1,96 @@
+{{ extends "global/Page.html" }}
+
+{{ block styles }}
+    <link href="{{ static 'eet1/custom.css' }}" rel="stylesheet">
+{{ endblock }}
+
+{{ block title }}
+    Parte Final
+{{ endblock }}
+
+{{ block content }}
+<h5>Situaciones 1 a 3</h5>
+<p>
+    Por favor haga clic en el recuadro <b><span style="color: #3344FF;">azul</span></b> que está frente a la opción que usted prefiera.<br>
+    Recuerde que debe decidir entre dos asignaciones de dinero: <b>Opción A</b> y <b>Opción B</b>.<br>
+    <i>Ambas opciones implican pagos para quién <b>envía</b> y quién <b>recibe</b></i>.
+</p>
+
+    <!-- Progress Bar -->
+    {{ if C.PROGRESS_BAR }}
+        <label>
+            Situación {{ page }} de 6
+        </label>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width:{{ progress }}%;">
+                <span class="sr-only"></span>
+            </div>
+        </div>
+    {{ endif }}
+
+    <!-- Table - Decisions (Option A/B) -->
+    <div class="card">
+        <div class="card-header">
+        Marque en la opción que prefiera.
+        </div>
+        <table class="table">
+            <tr>
+                <th>Opción A</th>
+                <td>
+                    Lo que usted recibe: {{ payoffA }} <br>
+                    Lo que la otra persona recibe: {{ otherA_1 }}
+                </td>
+                <td class="btn_cell">
+                    {{ if C.BUTTONS }}
+                        <button class="btn btn-primary choice" name="choice" value="A">
+                            Opción A
+                        </button>
+                    {{ else }}
+                        <input type="radio" name="choice" value="A" required>
+                    {{ endif }}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Opción B
+                </th>
+                <td>
+                    Lo que usted recibe: {{ optionB }} <br>
+                    Lo que la otra persona recibe: {{ optionB }}
+                </td>
+                <td class="btn_cell">
+                    {{ if C.BUTTONS }}
+                        <button class="btn btn-primary choice" name="choice" value="B">
+                            Opción B
+                        </button>
+                    {{ else }}
+                        <input type="radio" name="choice" value="B" required>
+                    {{ endif }}
+                </td>
+            </tr>
+            {{ if C.INDIFFERENCE }}
+            <tr>
+                <th>
+                </th>
+                <td>
+                    I'm indifferent between Option A and Option B
+                </td>
+                <td class="btn_cell">
+                    {{ if C.BUTTONS }}
+                        <button class="btn btn-primary choice" name="choice" value="I">
+                            Indifferent
+                        </button>
+                    {{ else }}
+                        <input type="radio" name="choice" value="I" required>
+                    {{ endif }}
+                </td>
+            </tr>
+            {{ endif }}
+        </table>
+    </div>
+    <br>
+{{ if not C.BUTTONS }}
+    {{ next_button }}
+{{ endif }}
+
+{{ endblock }}

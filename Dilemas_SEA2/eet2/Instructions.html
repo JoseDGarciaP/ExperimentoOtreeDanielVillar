@@ -1,0 +1,26 @@
+{{ extends "global/Page.html" }}
+
+{{ block styles }}
+    <link href="{{ static 'eet2/custom.css' }}" rel="stylesheet"/>
+{{ endblock }}
+
+{{ block title }}
+    Instrucciones de Pago
+{{ endblock }}
+
+{{ block content }}
+
+<div class="wrapper">
+    <p>
+    <h6>Parejas</h6>
+            Usted será emparejado con una persona que no está en la sala.<br>
+            En cada pareja hay dos tipos, la persona que <i>envía</i> y la persona que <i>recibe</i>.<br>
+            Usted responderá las diez preguntas como la persona que <i>envía</i> y sólo al finalizar la actividad se definirá aleatoriamente si usted es la persona que <i>envía</i>, o la persona que <i>recibe</i>.<br>
+            De ninguna manera usted podrá conocer la identidad de la persona con la que fueron emparejado, y la persona de otro grupo con la que fue emparejado tampoco podrá conocer su identidad.<br>
+    <h6>Pagos</h6>
+            Le pediremos que responda algunas preguntas de asignación de recursos entre quién <i>envía</i> y quién recibe. Una de estas asignaciones será seleccionada al azar para calcular su pago. Esto quiere decir que en realidad hay dos sorteos: cuál tarea se paga, y si usted recibirá las ganancias como la persona que <i>envía</i>, o la persona que <i>recibe</i>.
+    </p>
+
+</div>
+{{ next_button }}
+{{ endblock }}

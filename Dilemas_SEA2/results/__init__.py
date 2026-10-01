@@ -335,7 +335,9 @@ class Survey_2(Page):
         pago_aprobacion_social = player.participant.vars.get('pago_aprobacion_social', 0)
         pago_cal_usted = player.participant.vars.get('pago_cal_usted', 0)
         final_payoff = player.participant.vars.get('final_payoff', 0)
-        player.payoff_complete = C.SHOWFEE + int(final_payoff) + pago_cal_usted + pago_aprobacion_social
+        # ganancia adicional de eet1/eet2 (pagototal incluye 15000 fijos del juego original, se descuentan)
+        pago_eet = int(player.participant.vars.get('pagototal', 15000)) - 15000
+        player.payoff_complete = C.SHOWFEE + int(final_payoff) + pago_cal_usted + pago_aprobacion_social + pago_eet
 
 class Final(Page):
     form_model = 'player'
@@ -346,6 +348,7 @@ class Final(Page):
         pago_cal_usted = player.participant.vars.get('pago_cal_usted', 0)
         final_payoff = player.participant.vars.get('final_payoff', 0)
         selected_round = player.participant.vars.get('selected_round', 0)
+        pago_eet = int(player.participant.vars.get('pagototal', 15000)) - 15000
         payoff_complete = player.payoff_complete
         return{
             'showfee': C.SHOWFEE,
@@ -353,6 +356,7 @@ class Final(Page):
             'pago_cal_usted':pago_cal_usted,
             'final_payoff':final_payoff,
             'selected_round':selected_round,
+            'pago_eet': pago_eet,
             'payoff_complete': payoff_complete
             
         }

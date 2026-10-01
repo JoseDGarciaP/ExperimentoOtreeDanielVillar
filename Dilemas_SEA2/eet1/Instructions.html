@@ -1,0 +1,45 @@
+{{ extends "global/Page.html" }}
+
+{{ block styles }}
+    <link href="{{ static 'eet1/custom.css' }}" rel="stylesheet"/>
+{{ endblock }}
+
+{{ block title }}
+    Parte final
+{{ endblock }}
+
+{{ block content }}
+
+<div class="wrapper">
+    <p>En esta última parte del cuestionario, le presentaremos 6 situaciones diferentes sobre asignaciones de dinero.
+        En cada situación puede elegir entre dos asignaciones: <b>Opción A</b> y <b>Opción B</b>.
+        Cada asignación implica pagos para quién <b>envía</b> y quién <b>recibe</b>.</p>
+
+    <h5>Situaciones 1 a 3</h5>
+        <p>
+            En la <b>Opción A</b>, la asignación de dinero para quien <b>envía</b> irá cambiando, pero la asignación para quien recibe siempre será de $65.000.<br>
+            En la <b>Opción B</b>, a quien <b>envía</b> y <b>recibe</b> siempre se le asignan $50.000.
+        </p>
+
+    <h5>Situaciones 4 a 6</h5>
+    <p>
+        En la <b>Opción A</b>, la asignación de dinero para quien <b>envía</b> irá cambiando, pero la asignación para quien recibe siempre será de $35.000.<br>
+        En la <b>Opción B</b>, a quien <b>envía</b> y <b>recibe</b> siempre se le asignan $50.000.
+    </p>
+
+    <h5>Sorteo de las ganancias adicionales</h5>
+    <p>Le pedimos que responda a estas 6 situaciones con mucha atención,
+        pues seleccionaremos a 1 de cada 10 personas que respondan esta encuesta para que reciba ganancias adicionales a los $15.000 por completar la actividad.</p>
+
+    <p>
+        La ganancia adicional se calcula con una serie de loterías consecutivas:
+        <ol>
+            <li>La primera lotería define si usted recibirá la ganancia: 1 de cada 10 la recibirán.</li>
+            <li>La segunda lotería define si usted recibe la ganancia de la persona que envía, o la persona que recibe. Es igual de probable cada opción, como cuando se lanza una moneda para jugar al "cara y sello".</li>
+            <li>La tercera y última lotería define cuál de las seis situaciones se utilizará para definir el pago.</li>
+        </ol>
+        Usted no podrá conocer la identidad de la persona con la que fue emparejado, y la persona con la que fue emparejado tampoco podrá conocer su identidad.
+    </p>
+</div>
+{{ next_button }}
+{{ endblock }}

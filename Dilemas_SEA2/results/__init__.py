@@ -300,7 +300,7 @@ class Player(BasePlayer):
     )
     payoff_complete = models.IntegerField()
 
-    # Situaciones relacionadas con grupos armados en los últimos años (pregunta 18)
+    # Exposición a grupos armados y violencia (pregunta 18)
     violencia_a = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
     violencia_b = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
     violencia_c = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)

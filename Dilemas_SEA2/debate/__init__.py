@@ -11,7 +11,7 @@ class C(BaseConstants):
     NAME_IN_URL = 'debate'
     PLAYERS_PER_GROUP = 2
     NUM_ROUNDS = 1
-    ENDOWMENT = cu(10000)
+    ENDOWMENT = cu(1000)
     FAVOR = 'A FAVOR DE DENUNCIAR'
     CONTRA = 'EN CONTRA DE DENUNCIAR'
 
@@ -378,7 +378,7 @@ class Siguiente_etapa(Page):
     def before_next_page(player:Player, timeout_happened):
         moda_respuestas = set_calcular_moda_global(player.subsession)
         if moda_respuestas == player.posicion_final:
-            player.pago_aprobacion_social = 4000
+            player.pago_aprobacion_social = 400
         else:
             player.pago_aprobacion_social = 0
         player.participant.vars['pago_aprobacion_social'] = player.pago_aprobacion_social

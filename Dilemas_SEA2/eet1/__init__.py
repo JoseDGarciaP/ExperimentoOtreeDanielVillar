@@ -17,15 +17,15 @@ class C(BaseConstants):
     # número de pasos del procedimiento de escalera
     NUM_CHOICES = 3
 
-    OPTION_B = 50000
-    OTHER_A_1 = 65000
+    OPTION_B = 5000
+    OTHER_A_1 = 6500
     PROBABILITY = 100
 
     # pago inicial de la Opción A en la primera elección
-    PAYOFF_A = 50000
+    PAYOFF_A = 5000
 
     # aumento/disminución inicial del pago de la Opción A
-    DELTA_1 = -10000
+    DELTA_1 = -1000
 
     # opciones de apariencia (iguales al código original)
     INDIFFERENCE = False
@@ -77,7 +77,7 @@ class Player(BasePlayer):
 # *** FUNCIONES (antes métodos de Player / Subsession)
 # ******************************************************************************************************************** #
 def fmt(value):
-    """Formato de dinero igual al original: $65,000"""
+    """Formato de dinero igual al original: $6,500"""
     return "$" + format(int(value), ',d')
 
 

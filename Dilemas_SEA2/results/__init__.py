@@ -9,7 +9,7 @@ class C(BaseConstants):
     NAME_IN_URL = 'results'
     PLAYERS_PER_GROUP = 2
     NUM_ROUNDS = 1
-    SHOWFEE = 10000
+    SHOWFEE = 1000
 
 class Subsession(BaseSubsession):
     pass
@@ -363,8 +363,8 @@ class Survey_2(Page):
         pago_aprobacion_social = player.participant.vars.get('pago_aprobacion_social', 0)
         pago_cal_usted = player.participant.vars.get('pago_cal_usted', 0)
         final_payoff = player.participant.vars.get('final_payoff', 0)
-        # ganancia adicional de eet1/eet2 (pagototal incluye 15000 fijos del juego original, se descuentan)
-        pago_eet = int(player.participant.vars.get('pagototal', 15000)) - 15000
+        # ganancia adicional de eet1/eet2 (pagototal incluye 1500 fijos del juego original, se descuentan)
+        pago_eet = int(player.participant.vars.get('pagototal', 1500)) - 1500
         player.payoff_complete = C.SHOWFEE + int(final_payoff) + pago_cal_usted + pago_aprobacion_social + pago_eet
 
 class Final(Page):
@@ -376,7 +376,7 @@ class Final(Page):
         pago_cal_usted = player.participant.vars.get('pago_cal_usted', 0)
         final_payoff = player.participant.vars.get('final_payoff', 0)
         selected_round = player.participant.vars.get('selected_round', 0)
-        pago_eet = int(player.participant.vars.get('pagototal', 15000)) - 15000
+        pago_eet = int(player.participant.vars.get('pagototal', 1500)) - 1500
         payoff_complete = player.payoff_complete
         return{
             'showfee': C.SHOWFEE,

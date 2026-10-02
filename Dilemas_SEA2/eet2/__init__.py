@@ -16,12 +16,12 @@ Requiere que eet1 se haya jugado antes (usa participant.vars['eet_round_to_pay']
 class C(BaseConstants):
     NUM_CHOICES = 3
 
-    OPTION_B = 50000
-    OTHER_A_2 = 35000
+    OPTION_B = 5000
+    OTHER_A_2 = 3500
     PROBABILITY = 100
 
-    PAYOFF_A = 50000
-    DELTA_2 = -10000
+    PAYOFF_A = 5000
+    DELTA_2 = -1000
 
     INDIFFERENCE = False
     BUTTONS = True
@@ -75,7 +75,7 @@ class Player(BasePlayer):
 # *** FUNCIONES (antes métodos de Player / Subsession)
 # ******************************************************************************************************************** #
 def fmt(value):
-    """Formato de dinero igual al original: $ 35,000"""
+    """Formato de dinero igual al original: $ 3,500"""
     return "$ " + format(int(value), ',d')
 
 
@@ -129,13 +129,13 @@ def set_payoffs(player: Player):
         if pv['eet_choice'] == 'A':
             player.payoff_s = pv['eet_payoffA']
             if pv['eet_round_to_pay'] < 4:
-                player.payoff_r = 65000
+                player.payoff_r = 6500
             else:
-                player.payoff_r = 35000
+                player.payoff_r = 3500
         elif pv['eet_choice'] == 'B':
             player.payoff_s = C.OPTION_B
             player.payoff_r = C.OPTION_B
-        pv['pagototal'] = int(player.payoff_s) + 15000
+        pv['pagototal'] = int(player.payoff_s) + 1500
 
         # fila de cambio implícita
         player.in_round(3).switching_row_2 = int(pv['icl_switching_row_2'])
@@ -209,7 +209,7 @@ class Results(Page):
             option_to_pay=pv['eet_choice'],
             payoff_relevant=pv['eet_choice'],
             # lo que recibe la otra persona en la Opción A (antes: if choice_to_pay < 4 en la plantilla)
-            other_A_paid='$65,000' if choice_to_pay < 4 else '$35,000',
+            other_A_paid='$6,500' if choice_to_pay < 4 else '$3,500',
             payoff_s=fmt(player.payoff_s),
             payoff_r=fmt(player.payoff_r),
             payoff_total=fmt(total),

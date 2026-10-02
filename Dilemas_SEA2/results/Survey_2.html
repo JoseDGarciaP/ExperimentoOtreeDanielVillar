@@ -227,8 +227,12 @@
         <tr id="fila_violencia_l" style="display: none;">
             <td>l) ¿Cuándo fue el último desplazamiento de tu hogar?</td>
             <td>
-                Año: {{ formfield player.violencia_l_anio label="" }}
-                Mes: {{ formfield player.violencia_l_mes label="" }}
+                <div class="d-flex align-items-center" style="gap: 6px;">
+                    Año: <span style="width: 90px;">{{ form.violencia_l_anio }}</span>
+                    Mes: <span style="width: 130px;">{{ form.violencia_l_mes }}</span>
+                </div>
+                {{ formfield_errors 'violencia_l_anio' }}
+                {{ formfield_errors 'violencia_l_mes' }}
             </td>
         </tr>
     </tbody>

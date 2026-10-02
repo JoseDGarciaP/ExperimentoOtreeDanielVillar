@@ -208,6 +208,43 @@
     </div>
 </div>
 
+<div class="d-flex align-items-start wrap">
+    <p class="inner" align="justify"><b>18)</b> En los últimos años, ¿usted o algún miembro de su hogar ha vivido alguna de las siguientes situaciones?</p>
+</div>
+<table class="table table-sm">
+    <tbody>
+        <tr><td>a) Ver a un grupo armado portando armas abiertamente o patrullando el territorio.</td><td>{{ for c in form.violencia_a }}{{ c }} {{ c.label }}&nbsp;&nbsp;{{ endfor }}{{ formfield_errors 'violencia_a' }}</td></tr>
+        <tr><td>b) Ver o escuchar disparos, explosiones o enfrentamientos armados en el barrio.</td><td>{{ for c in form.violencia_b }}{{ c }} {{ c.label }}&nbsp;&nbsp;{{ endfor }}{{ formfield_errors 'violencia_b' }}</td></tr>
+        <tr><td>c) Saber de amenazas de un grupo armado hacia el barrio, por ejemplo, con panfletos, carteles u otros mensajes.</td><td>{{ for c in form.violencia_c }}{{ c }} {{ c.label }}&nbsp;&nbsp;{{ endfor }}{{ formfield_errors 'violencia_c' }}</td></tr>
+        <tr><td>d) Presenciar que una persona resultara herida o perdiera la vida a causa de un grupo armado.</td><td>{{ for c in form.violencia_d }}{{ c }} {{ c.label }}&nbsp;&nbsp;{{ endfor }}{{ formfield_errors 'violencia_d' }}</td></tr>
+        <tr><td>e) Que algún familiar resultara agredido o herido por un grupo armado.</td><td>{{ for c in form.violencia_e }}{{ c }} {{ c.label }}&nbsp;&nbsp;{{ endfor }}{{ formfield_errors 'violencia_e' }}</td></tr>
+        <tr><td>f) Que algún familiar fuera reclutado a la fuerza por un grupo armado.</td><td>{{ for c in form.violencia_f }}{{ c }} {{ c.label }}&nbsp;&nbsp;{{ endfor }}{{ formfield_errors 'violencia_f' }}</td></tr>
+        <tr><td>g) Que algún familiar perdiera la vida a causa de un grupo armado.</td><td>{{ for c in form.violencia_g }}{{ c }} {{ c.label }}&nbsp;&nbsp;{{ endfor }}{{ formfield_errors 'violencia_g' }}</td></tr>
+        <tr><td>h) Recibir amenazas o maltrato verbal por parte de un grupo armado.</td><td>{{ for c in form.violencia_h }}{{ c }} {{ c.label }}&nbsp;&nbsp;{{ endfor }}{{ formfield_errors 'violencia_h' }}</td></tr>
+        <tr><td>i) Ser víctima de extorsión por parte de un grupo armado.</td><td>{{ for c in form.violencia_i }}{{ c }} {{ c.label }}&nbsp;&nbsp;{{ endfor }}{{ formfield_errors 'violencia_i' }}</td></tr>
+        <tr><td>j) Tener que permanecer en casa sin poder salir por enfrentamientos entre grupos armados.</td><td>{{ for c in form.violencia_j }}{{ c }} {{ c.label }}&nbsp;&nbsp;{{ endfor }}{{ formfield_errors 'violencia_j' }}</td></tr>
+        <tr><td>k) Tener que dejar el lugar de residencia a causa de un grupo armado.</td><td>{{ for c in form.violencia_k }}{{ c }} {{ c.label }}&nbsp;&nbsp;{{ endfor }}{{ formfield_errors 'violencia_k' }}</td></tr>
+        <tr id="fila_violencia_l" style="display: none;">
+            <td>l) ¿Cuándo fue la última vez que su hogar tuvo que dejar su lugar de residencia?</td>
+            <td>
+                Año: {{ formfield player.violencia_l_anio label="" }}
+                Mes: {{ formfield player.violencia_l_mes label="" }}
+            </td>
+        </tr>
+    </tbody>
+</table>
+<script>
+    // La pregunta (l) solo aparece si respondió "Sí" en la (k)
+    function mostrarViolenciaL() {
+        var k = document.querySelector('input[name="violencia_k"]:checked');
+        document.getElementById('fila_violencia_l').style.display = (k && k.value === '1') ? '' : 'none';
+    }
+    document.querySelectorAll('input[name="violencia_k"]').forEach(function (r) {
+        r.addEventListener('change', mostrarViolenciaL);
+    });
+    document.addEventListener('DOMContentLoaded', mostrarViolenciaL);
+</script>
+
 <br>
 <br>
 <div class="text-center py-2">

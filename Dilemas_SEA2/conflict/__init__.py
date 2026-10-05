@@ -6,11 +6,11 @@ class C(BaseConstants):
     PLAYERS_PER_GROUP = 2
     NUM_ROUNDS = 4
     
-    MUTUAL_COOPERATE = 1600
-    MUTUAL_DEFECT = 400
+    MUTUAL_COOPERATE = 16000
+    MUTUAL_DEFECT = 4000
     # Según las instrucciones: quien elige A recibe X y quien elige B recibe Y.
-    X_VALUES = [800, 0, 800, 0]        # pago para quien elige A
-    Y_VALUES = [800, 800, 2400, 2400]  # pago para quien elige B
+    X_VALUES = [8000, 0, 8000, 0]        # pago para quien elige A
+    Y_VALUES = [8000, 8000, 24000, 24000]  # pago para quien elige B
     ORDER = [0, 1, 2, 3]
 
 class Subsession(BaseSubsession):

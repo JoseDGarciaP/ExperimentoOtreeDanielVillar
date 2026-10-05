@@ -9,7 +9,7 @@ class C(BaseConstants):
     NAME_IN_URL = 'results'
     PLAYERS_PER_GROUP = 2
     NUM_ROUNDS = 1
-    SHOWFEE = 1000
+    SHOWFEE = 10000
 
 class Subsession(BaseSubsession):
     pass

@@ -41,8 +41,6 @@ class Player(BasePlayer):
     # Bloque de firma del asentimiento informado (Pantalla 2 del documento)
     nombre_participante = models.StringField(label='', blank=True)
     documento_participante = models.StringField(label='', blank=True)
-    firma_participante = models.StringField(label='', blank=True)
-    fecha_participante = models.StringField(label='', blank=True)
     telefono_participante = models.StringField(label='', blank=True)
     
     posicion_afin = models.BooleanField(
@@ -161,8 +159,8 @@ def minimo_cinco_palabras(texto):
 class Consentimiento(Page):
     form_model = 'player'
     form_fields = [
-        'nombre_participante', 'documento_participante', 'firma_participante',
-        'fecha_participante', 'telefono_participante', 'consentimiento',
+        'nombre_participante', 'documento_participante',
+        'telefono_participante', 'consentimiento',
     ]
     @staticmethod
     # Método para personalizar el flujo de avance

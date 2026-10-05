@@ -1,14 +1,14 @@
-{{ extends 'global/Page.html' }} 
+{{ extends 'global/Page.html' }}
 
-{{ block title }} ASENTIMIENTO INFORMADO {{ endblock }} 
+{{ block title }} ASENTIMIENTO INFORMADO {{ endblock }}
 
 {{block content }}
 
-<p><strong>Colegio:</strong> ______________________________</p>
+
 
 <p>
     Usted ha sido seleccionado(a) para participar en una encuesta porque es un
-    estudiante de grado 9, 10 u 11 residente en el departamento de Arauca. Por
+    estudiante de grado 11 residente en el departamento de Arauca. Por
     favor lea cuidadosamente la información que se presenta a continuación.
     Recuerde que tiene plena libertad de formular preguntas sobre la encuesta a
     las facilitadoras de la actividad y decidir si desea participar o no. Si
@@ -87,20 +87,12 @@
     de identidad número {{ formfield player.documento_participante label="" }} he leído y
     entendido la información contenida en este documento; por lo tanto, voluntariamente
     acepto participar en esta investigación.
-    Firma: {{ formfield player.firma_participante label="" }},
-    Fecha: {{ formfield player.fecha_participante label="" }},
-    Teléfono: {{ formfield player.telefono_participante label="" }},
+    Teléfono: {{ formfield player.telefono_participante label="" }}
 </p>
 
-<p>
-    Yo, Mileth Xiomara Rincón Ramírez, coordinadora de campo del proyecto,
-    certifico que la información será recogida de manera confidencial. Firmado,
-    __________________, C.C. 1234338768 de Floridablanca. Teléfono 3224498344.
-</p>
-
-{{formfield player.consentimiento }} 
+{{formfield player.consentimiento }}
 <br>
 
-{{ next_button }} 
+{{ next_button }}
 
 {{ endblock }}

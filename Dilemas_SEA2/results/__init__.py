@@ -160,93 +160,27 @@ class Player(BasePlayer):
         widget=widgets.RadioSelectHorizontal(),
         verbose_name="Antes de criticar a alguien, intento imaginar cómo me sentiría si estuviera en su lugar."
     )
+    # Exposición a grupos armados y violencia (pregunta 1 de Survey_2)
+    violencia_a = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
+    violencia_b = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
+    violencia_c = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
+    violencia_d = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
+    violencia_e = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
+    violencia_f = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
+    violencia_g = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
+    violencia_h = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
+    violencia_i = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
+    violencia_j = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
+    violencia_k = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
+    # Solo si violencia_k = 1
+    violencia_l_anio = models.IntegerField(min=1950, max=2026, blank=True)
+    violencia_l_mes = models.IntegerField(
+        choices=[[1, "Enero"], [2, "Febrero"], [3, "Marzo"], [4, "Abril"], [5, "Mayo"], [6, "Junio"],
+                [7, "Julio"], [8, "Agosto"], [9, "Septiembre"], [10, "Octubre"], [11, "Noviembre"], [12, "Diciembre"]],
+        blank=True
+    )
     age = models.IntegerField()
     gender_sex = models.IntegerField(choices=[[0, "Masculino"], [1, "Femenino"], [2, "Otro"]])
-    major = models.IntegerField(
-        choices=[
-            [1, "Administración de Empresas"],
-            [2, "Administración de Negocios Internacionales"],
-            [3, "Administración en Logística y Producción"],
-            [4, "Antropología"],
-            [5, "Arquitectura"],
-            [6, "Artes"],
-            [7, "Artes Liberales en Ciencias Sociales"],
-            [8, "Biología"],
-            [9, "Ciencia Política y Gobierno"],
-            [10, "Ciencias del Sistema Tierra"],
-            [11, "Creación"],
-            [12, "Diseño"],
-            [13, "Economía"],
-            [14, "Enfermería"],
-            [15, "Emprendimiento"],
-            [16, "Filosofía"],
-            [17, "Finanzas y Comercio Internacional"],
-            [18, "Fisioterapia"],
-            [19, "Fonoaudiología"],
-            [20, "Gestión y Desarrollo Urbanos"],
-            [21, "Historia"],
-            [22, "Ingeniería Biomédica"],
-            [23, "Ingeniería Industrial"],
-            [24, "Ingeniería Electrónica"],
-            [25, "Ingeniería de Sistemas"],
-            [26, "Jurisprudencia"],
-            [27, "Licenciatura en Filosofía"],
-            [28, "Marketing y Negocios Digitales"],
-            [29, "Medicina"],
-            [30, "Periodismo y Opinión Pública"],
-            [31, "Psicología"],
-            [32, "Relaciones Internacionales"],
-            [33, "Sociología"],
-            [34, "Teatro Musical"],
-            [35, "Terapia Ocupacional"],
-            [36, "Lenguas Modernas"],
-            [37, "Narrativas Digitales"],
-            [38, "Ingeniería Mecánica"],
-            [39, "Ingeniería Química"],
-            [40, "Química"],
-            [41, "Física"],
-            [42, "Medicina Veterinaria"],
-            [43, "Geología"],
-            [44, "Filología"],
-            [45, "Estudios Globales"],
-            [46, "Ciencias de la computación"],
-            [47, "Cine y televisión"],
-            [48, "Trabajo social"],
-            [49, "Nutrición"],
-            [50, "Zootecnia"],
-            [51, "Ingeniería sanitaria"],
-            [52, "Ingeniería Ambiental"],
-            [53, "Administración Ambiental"],
-            [54, "Comunicación Social"],
-            [55, "Ingeniería catastral"],
-            [56, "Ingeniería civil"],
-            [57, "Ingeniería eléctrica"],
-            [58, "Ingeniería mecatrónica"],
-            [59, "Ingeniería forestal"],
-            [60, "Matemáticas aplicadas y computación"],
-            [61, "Matemáticas"],
-            [62, "Contaduría"],
-            [63, "Otra"]
-        ]
-    )
-    semester = models.IntegerField(
-        choices=[
-            [0, "Egresado"],
-            [1, 1],
-            [2, 2],
-            [3, 3],
-            [4, 4],
-            [5, 5],
-            [6, 6],
-            [7, 7],
-            [8, 8],
-            [9, 9],
-            [10, 10],
-            [11, 11],
-            [12, 12],
-            [13, "más de 12"],
-        ]
-    )
     stratum = models.IntegerField(
         choices=[[0, "No estratificado"], [1, "1"], [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"]]
     )
@@ -300,26 +234,6 @@ class Player(BasePlayer):
     )
     payoff_complete = models.IntegerField()
 
-    # Exposición a grupos armados y violencia (pregunta 18)
-    violencia_a = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
-    violencia_b = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
-    violencia_c = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
-    violencia_d = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
-    violencia_e = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
-    violencia_f = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
-    violencia_g = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
-    violencia_h = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
-    violencia_i = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
-    violencia_j = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
-    violencia_k = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
-    # Solo si violencia_k = 1
-    violencia_l_anio = models.IntegerField(min=1950, max=2026, blank=True)
-    violencia_l_mes = models.IntegerField(
-        choices=[[1, "Enero"], [2, "Febrero"], [3, "Marzo"], [4, "Abril"], [5, "Mayo"], [6, "Junio"],
-                [7, "Julio"], [8, "Agosto"], [9, "Septiembre"], [10, "Octubre"], [11, "Noviembre"], [12, "Diciembre"]],
-        blank=True
-    )
-
 # PAGES
 
 class Survey(Page):
@@ -346,18 +260,18 @@ class Survey(Page):
 
 class Survey_2(Page):
     form_model = 'player'
-    form_fields = ["age", "gender_sex", "major", "semester", "stratum", "experiments", "income",
-                    "mother_educ", "father_educ", "income_stair", "cantril_now", "cantril_5y",
-                    "risk_measure", "G_trust", "math_self", "patience", "punish_justice",
-                    "violencia_a", "violencia_b", "violencia_c", "violencia_d", "violencia_e", "violencia_f",
+    form_fields = ["violencia_a", "violencia_b", "violencia_c", "violencia_d", "violencia_e", "violencia_f",
                     "violencia_g", "violencia_h", "violencia_i", "violencia_j", "violencia_k",
-                    "violencia_l_anio", "violencia_l_mes"
+                    "violencia_l_anio", "violencia_l_mes",
+                    "age", "gender_sex", "stratum", "experiments", "income",
+                    "mother_educ", "father_educ", "income_stair", "cantril_now", "cantril_5y",
+                    "risk_measure", "G_trust", "math_self", "patience", "punish_justice"
     ]
 
     @staticmethod
     def error_message(player: Player, values):
         if values['violencia_k'] == 1 and (values['violencia_l_anio'] is None or values['violencia_l_mes'] is None):
-            return "Por favor indique el año y el mes en la pregunta 18 (l)."
+            return "Por favor indique el año y el mes en la pregunta 1 (l)."
 
     def before_next_page(player:Player, timeout_happened):
         pago_aprobacion_social = player.participant.vars.get('pago_aprobacion_social', 0)

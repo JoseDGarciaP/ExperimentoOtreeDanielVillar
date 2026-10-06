@@ -36,10 +36,18 @@ class Player(BasePlayer):
     cooperate_accuracy = models.IntegerField(min=0, max=100, label='¿Qué tan seguro está?')
 
 def creating_session(self):
-    for group in self.get_groups():
-        group.selected_round = random.randint(1, C.NUM_ROUNDS)
-        r_list = random.sample(C.ORDER, len(C.ORDER))
-        group.levels = ",".join(map(str, r_list))
+    if self.round_number == 1:
+        for group in self.get_groups():
+            group.selected_round = random.randint(1, C.NUM_ROUNDS)
+            r_list = random.sample(C.ORDER, len(C.ORDER))
+            group.levels = ",".join(map(str, r_list))
+    else:
+        # Las rondas 2 a 4 guardan el mismo sorteo de la ronda 1 (el que realmente se usa),
+        # en lugar de un sorteo nuevo que nunca se aplica.
+        for group in self.get_groups():
+            group_r1 = group.in_round(1)
+            group.selected_round = group_r1.selected_round
+            group.levels = group_r1.levels
 
 def set_payoffs(group: Group):
         for p in group.get_players():

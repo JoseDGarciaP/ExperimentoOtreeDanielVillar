@@ -111,31 +111,17 @@ def set_pagocalificacion(player:Subsession):
         if i + 1 < num_groups:  # Verifica que haya un grupo para intercambiar
             group1 = groups[i]  # Primer grupo
             group2 = groups[i + 1]  # Segundo grupo
-            g1p1 = group1.get_player_by_id(1)
-            g1p2 = group1.get_player_by_id(2)
-            g2p1 = group2.get_player_by_id(1)
-            g2p2 = group2.get_player_by_id(2)
-            if g1p1.agree == 1:
-                ### Definir pagos del jugador 1 y 2 del primer grupo
-                g1p1.calificacion_otros = g2p1.calificacion_jugador_afavor + g2p2.calificacion_jugador_afavor
-                g1p1.pago_cal_usted = g1p1.calificacion_usted + g1p2.calificacion_pareja + g1p1.calificacion_otros
-                g1p2.calificacion_otros = g2p1.calificacion_jugador_encontra + g2p2.calificacion_jugador_encontra
-                g1p2.pago_cal_usted = g1p2.calificacion_usted + g1p1.calificacion_pareja + g1p2.calificacion_otros
-                ### Definir pagos del jugador 1 y 2 del segundo grupo
-                g2p1.calificacion_otros = g1p1.calificacion_jugador_afavor + g1p2.calificacion_jugador_afavor
-                g2p1.pago_cal_usted = g2p1.calificacion_usted + g2p2.calificacion_pareja + g2p1.calificacion_otros
-                g2p2.calificacion_otros = g1p1.calificacion_jugador_encontra + g1p2.calificacion_jugador_encontra
-                g2p2.pago_cal_usted = g2p2.calificacion_usted + g2p1.calificacion_pareja + g2p2.calificacion_otros
-            else:
-                g1p1.calificacion_otros = g2p1.calificacion_jugador_encontra + g2p2.calificacion_jugador_encontra
-                g1p1.pago_cal_usted = g1p1.calificacion_usted + g1p2.calificacion_pareja + g1p1.calificacion_otros
-                g1p2.calificacion_otros = g2p1.calificacion_jugador_afavor + g2p2.calificacion_jugador_afavor
-                g1p2.pago_cal_usted = g1p2.calificacion_usted + g1p1.calificacion_pareja + g1p2.calificacion_otros
-                ### Definir pagos del jugador 1 y 2 del segundo grupo
-                g2p1.calificacion_otros = g1p1.calificacion_jugador_encontra + g1p2.calificacion_jugador_encontra
-                g2p1.pago_cal_usted = g2p1.calificacion_usted + g2p2.calificacion_pareja + g2p1.calificacion_otros
-                g2p2.calificacion_otros = g1p1.calificacion_jugador_afavor + g1p2.calificacion_jugador_afavor
-                g2p2.pago_cal_usted = g2p2.calificacion_usted + g2p1.calificacion_pareja + g2p2.calificacion_otros       
+            # Cada jugador recibe las calificaciones que la otra pareja dio a SU postura.
+            # Se usa la postura (agree) de cada jugador, no la del jugador 1 del primer grupo,
+            # porque en cada pareja el jugador 1 puede tener una postura distinta.
+            for grupo_propio, grupo_otro in [(group1, group2), (group2, group1)]:
+                for p in grupo_propio.get_players():
+                    pareja = p.get_others_in_group()[0]
+                    if p.agree == 1:
+                        p.calificacion_otros = sum(q.calificacion_jugador_afavor for q in grupo_otro.get_players())
+                    else:
+                        p.calificacion_otros = sum(q.calificacion_jugador_encontra for q in grupo_otro.get_players())
+                    p.pago_cal_usted = p.calificacion_usted + pareja.calificacion_pareja + p.calificacion_otros
 
 def set_calcular_moda_global(self:Subsession):
         # Obtiene todas las respuestas de todos los jugadores en la subsesión

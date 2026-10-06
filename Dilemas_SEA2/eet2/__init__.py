@@ -66,6 +66,7 @@ class Player(BasePlayer):
     choice = models.StringField()
     switching_row_2 = models.IntegerField()
     situation = models.IntegerField()
+    situacion_pagada = models.IntegerField()  # situación (1-6) sorteada para el reparto de dinero
     payoff_total = models.CurrencyField()
     payoff_resignation = models.IntegerField(min=0)
     payoff_otherPlayer = models.IntegerField(min=0)
@@ -126,6 +127,7 @@ def set_payoffs(player: Player):
 
     # se calcula al terminar todas las elecciones (o si eligió "indiferente")
     if current_round == C.NUM_ROUNDS or current_choice == 'I':
+        player.situacion_pagada = pv['eet_round_to_pay']
         if pv['eet_choice'] == 'A':
             player.payoff_s = pv['eet_payoffA']
             if pv['eet_round_to_pay'] < 4:

@@ -164,8 +164,10 @@ class Decision(Page):
 
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
-        set_payoffA(player)
+        # primero se actualiza la fila de cambio y luego se guarda (set_payoffA la anota en switching_row_1),
+        # para que incluya también la elección de esta ronda
         update_switching_row(player)
+        set_payoffA(player)
         set_eet(player)
 
 

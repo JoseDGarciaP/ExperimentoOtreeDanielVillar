@@ -22,13 +22,19 @@ USE_POINTS = False
 DEMO_PAGE_INTRO_HTML = ''
 PARTICIPANT_FIELDS = []
 SESSION_FIELDS = []
-ROOMS = []
+ROOMS = [
+    dict(
+        name='dilemas',
+        display_name='Dilemas',
+        participant_label_file='_rooms/dilemas.txt',
+    ),
+]
 
 ADMIN_USERNAME = 'admin'
 # for security, best to set admin password in an environment variable
 ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 
-SECRET_KEY = 'blahblah'
+SECRET_KEY = environ.get('SECRET_KEY', 'blahblah')
 
 # if an app is included in SESSION_CONFIGS, you don't need to list it here
 INSTALLED_APPS = ['otree']

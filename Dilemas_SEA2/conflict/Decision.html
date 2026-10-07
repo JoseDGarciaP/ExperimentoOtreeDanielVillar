@@ -6,11 +6,15 @@
 <style>
     th, td {
         text-align: center;
-        vertical-align: middle; 
+        vertical-align: middle;
     }
 
     .cell-a, .cell-b, .cell-usted {
         width: 70px;
+    }
+
+    #bloque-seguridad.bloqueado {
+        opacity: 0.4;
     }
 
 </style>
@@ -45,33 +49,38 @@
             </tr>
             <tr>
                 <th rowspan="2"><span>Usted</span></th>
-                <td><button name="cooperate" value="True" class="btn btn-primary btn-large">A</button></td>
+                <!-- type="button": solo marca la elección, no envía la página -->
+                <td><button type="button" class="btn btn-outline-primary btn-large eleccion" data-valor="True">A</button></td>
                 <td><br>[<span style="color:blue"><b>16000</b></span>, 16000]</td>
                 <td><br>[<span style="color:blue"><b>{{x_value}}</b></span>, {{y_value}}]</td>
             </tr>
             <tr>
-                <td><button name="cooperate" value="False" class="btn btn-primary btn-large" >B</button></td>
+                <td><button type="button" class="btn btn-outline-primary btn-large eleccion" data-valor="False">B</button></td>
                 <td><br>[<span style="color:blue"><b>{{y_value}}</b></span>, {{x_value}}]</td>
                 <td><br>[<span style="color:blue"><b>4000</b></span>, 4000]</td>
 
             </tr>
         </table>
+        <!-- Guarda la elección A/B (True/False); lo llena el script al tocar A o B -->
+        <input type="hidden" name="cooperate" id="cooperate" value="">
+        {{ formfield_errors 'cooperate' }}
         <br>
         <p><b>Preguntas: </b></p>
 
         {{ formfield 'cooperate_partner' }}
 
-        <div style="margin-top:25px;">
+        <!-- Bloqueado hasta elegir A o B: primero la decisión, después el deslizador -->
+        <div id="bloque-seguridad" class="bloqueado" style="margin-top:25px;">
             <label for="cooperate_accuracy">{{ form.cooperate_accuracy.label }}</label>
 
             <div style="display:flex; align-items:center; gap:12px; margin:15px 0;">
                 <span><strong>0</strong></span>
                 <input type="range" name="cooperate_accuracy" id="cooperate_accuracy"
-                    min="0" max="100" step="1" value="50" style="flex:1;">
+                    min="0" max="100" step="1" value="0" style="flex:1;" disabled>
                 <span><strong>100</strong></span>
             </div>
 
-            <p style="text-align:center;">Seguridad: <strong id="accuracy-actual">50</strong></p>
+            <p style="text-align:center;">Seguridad: <strong id="accuracy-actual">0</strong></p>
             {{ formfield_errors 'cooperate_accuracy' }}
         </div>
 
@@ -84,7 +93,32 @@
     <script>
         const s = document.getElementById('cooperate_accuracy');
         const out = document.getElementById('accuracy-actual');
+        const eleccion = document.getElementById('cooperate');
+        const bloque = document.getElementById('bloque-seguridad');
+
         s.addEventListener('input', () => out.textContent = s.value);
+
+        // Al tocar A o B: guarda la elección, resalta el botón y desbloquea el deslizador
+        document.querySelectorAll('.eleccion').forEach(b => b.addEventListener('click', () => {
+            eleccion.value = b.dataset.valor;
+            document.querySelectorAll('.eleccion').forEach(x => {
+                x.classList.toggle('btn-primary', x === b);
+                x.classList.toggle('btn-outline-primary', x !== b);
+            });
+            s.disabled = false;
+            bloque.classList.remove('bloqueado');
+        }));
+
+        // Solo "Siguiente" envía; antes revisa que estén la decisión y la pregunta
+        document.getElementById('form').addEventListener('submit', e => {
+            if (!eleccion.value) {
+                e.preventDefault();
+                alert('Primero elija A o B en la tabla.');
+            } else if (!document.querySelector('input[name="cooperate_partner"]:checked')) {
+                e.preventDefault();
+                alert('Responda qué cree que elige el otro participante en esta situación.');
+            }
+        });
     </script>
 
 {{ endblock }}

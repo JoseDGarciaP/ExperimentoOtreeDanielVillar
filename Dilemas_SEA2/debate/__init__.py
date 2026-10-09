@@ -39,9 +39,9 @@ class Player(BasePlayer):
         label='¿Aceptar términos?', widget=widgets.RadioSelect)
 
     # Bloque de firma del asentimiento informado (Pantalla 2 del documento)
-    nombre_participante = models.StringField(label='', blank=True)
-    documento_participante = models.StringField(label='', blank=True)
-    telefono_participante = models.StringField(label='', blank=True)
+    nombre_participante = models.StringField(label='')
+    documento_participante = models.StringField(label='')
+    telefono_participante = models.StringField(label='')
     
     posicion_afin = models.BooleanField(
         choices=[[True, 'A favor'], [False, 'En contra']],

@@ -13,8 +13,9 @@
         width: 70px;
     }
 
-    #bloque-seguridad.bloqueado {
+    #bloque-creencia.bloqueado, #bloque-seguridad.bloqueado {
         opacity: 0.4;
+        pointer-events: none;
     }
 
 </style>
@@ -67,9 +68,12 @@
         <br>
         <p><b>Preguntas: </b></p>
 
-        {{ formfield 'cooperate_partner' }}
+        <!-- Bloqueado hasta elegir A o B -->
+        <div id="bloque-creencia" class="bloqueado">
+            {{ formfield 'cooperate_partner' }}
+        </div>
 
-        <!-- Bloqueado hasta elegir A o B: primero la decisión, después el deslizador -->
+        <!-- Bloqueado hasta responder la creencia: A/B, después creencia, después deslizador -->
         <div id="bloque-seguridad" class="bloqueado" style="margin-top:25px;">
             <label for="cooperate_accuracy">{{ form.cooperate_accuracy.label }}</label>
 
@@ -95,16 +99,25 @@
         const out = document.getElementById('accuracy-actual');
         const eleccion = document.getElementById('cooperate');
         const bloque = document.getElementById('bloque-seguridad');
+        const bloqueCreencia = document.getElementById('bloque-creencia');
+        const creencias = document.querySelectorAll('input[name="cooperate_partner"]');
+        creencias.forEach(r => r.disabled = true);
 
         s.addEventListener('input', () => out.textContent = s.value);
 
-        // Al tocar A o B: guarda la elección, resalta el botón y desbloquea el deslizador
+        // Al tocar A o B: guarda la elección, resalta el botón y desbloquea la creencia
         document.querySelectorAll('.eleccion').forEach(b => b.addEventListener('click', () => {
             eleccion.value = b.dataset.valor;
             document.querySelectorAll('.eleccion').forEach(x => {
                 x.classList.toggle('btn-primary', x === b);
                 x.classList.toggle('btn-outline-primary', x !== b);
             });
+            creencias.forEach(r => r.disabled = false);
+            bloqueCreencia.classList.remove('bloqueado');
+        }));
+
+        // Al responder la creencia: desbloquea el deslizador
+        creencias.forEach(r => r.addEventListener('change', () => {
             s.disabled = false;
             bloque.classList.remove('bloqueado');
         }));

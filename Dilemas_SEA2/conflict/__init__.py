@@ -31,7 +31,7 @@ class Player(BasePlayer):
         choices=[[True, 'A'], [False, 'B']],
         doc="""Other decision""",
         widget=widgets.RadioSelect,
-        label='¿Qué crees que eligió el otro participante?'
+        label='¿Qué crees que elige el otro participante en esta situación?'
     )
     cooperate_accuracy = models.IntegerField(min=0, max=100, label='¿Qué tan seguro está?')
 

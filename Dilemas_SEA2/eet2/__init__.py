@@ -67,6 +67,8 @@ class Player(BasePlayer):
     switching_row_2 = models.IntegerField()
     situation = models.IntegerField()
     situacion_pagada = models.IntegerField()  # situación (1-6) sorteada para el reparto de dinero
+    rol_pagado = models.StringField()  # 'envia' o 'recibe', sorteado en eet1
+    pago_eet = models.IntegerField()  # ganancia adicional que se suma al pago total (payoff_s o payoff_r según el rol)
     payoff_total = models.CurrencyField()
     payoff_resignation = models.IntegerField(min=0)
     payoff_otherPlayer = models.IntegerField(min=0)
@@ -137,7 +139,14 @@ def set_payoffs(player: Player):
         elif pv['eet_choice'] == 'B':
             player.payoff_s = C.OPTION_B
             player.payoff_r = C.OPTION_B
-        pv['pagototal'] = int(player.payoff_s) + 1500
+
+        # lotería de rol: recibe lo de quien envía (payoff_s) o lo de quien recibe (payoff_r)
+        player.rol_pagado = pv['eet_rol_pagado']
+        if player.rol_pagado == 'envia':
+            player.pago_eet = int(player.payoff_s)
+        else:
+            player.pago_eet = int(player.payoff_r)
+        pv['pago_eet'] = player.pago_eet
 
         # fila de cambio implícita
         player.in_round(3).switching_row_2 = int(pv['icl_switching_row_2'])

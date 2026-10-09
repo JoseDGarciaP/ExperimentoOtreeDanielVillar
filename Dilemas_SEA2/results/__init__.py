@@ -277,8 +277,8 @@ class Survey_2(Page):
         pago_aprobacion_social = player.participant.vars.get('pago_aprobacion_social', 0)
         pago_cal_usted = player.participant.vars.get('pago_cal_usted', 0)
         final_payoff = player.participant.vars.get('final_payoff', 0)
-        # ganancia adicional de eet1/eet2 (pagototal incluye 1500 fijos del juego original, se descuentan)
-        pago_eet = int(player.participant.vars.get('pagototal', 1500)) - 1500
+        # ganancia adicional de eet1/eet2: situación sorteada (1-6) y rol sorteado (envía/recibe), calculada en eet2
+        pago_eet = int(player.participant.vars.get('pago_eet', 0))
         player.payoff_complete = C.SHOWFEE + int(final_payoff) + pago_cal_usted + pago_aprobacion_social + pago_eet
 
 class Final(Page):
@@ -290,9 +290,13 @@ class Final(Page):
         pago_cal_usted = player.participant.vars.get('pago_cal_usted', 0)
         final_payoff = player.participant.vars.get('final_payoff', 0)
         selected_round = player.participant.vars.get('selected_round', 0)
-        pago_eet = int(player.participant.vars.get('pagototal', 1500)) - 1500
+        pago_eet = int(player.participant.vars.get('pago_eet', 0))
+        eet_situacion = player.participant.vars.get('eet_round_to_pay', 0)
+        eet_rol = 'quien envía' if player.participant.vars.get('eet_rol_pagado') == 'envia' else 'quien recibe'
         payoff_complete = player.payoff_complete
         return{
+            'eet_situacion': eet_situacion,
+            'eet_rol': eet_rol,
             'showfee': C.SHOWFEE,
             'pago_aprobacion_social': pago_aprobacion_social,
             'pago_cal_usted':pago_cal_usted,

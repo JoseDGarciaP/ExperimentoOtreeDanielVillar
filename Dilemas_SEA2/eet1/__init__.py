@@ -48,11 +48,14 @@ class Subsession(BaseSubsession):
 
 
 def creating_session(subsession: Subsession):
-    # lista de pagos de la Opción A, fila de cambio implícita y situación (1-6) que se paga
+    # lista de pagos de la Opción A, fila de cambio implícita y loterías del pago adicional:
+    #   - lotería de rol: se paga lo de quien envía o lo de quien recibe (50/50)
+    #   - lotería de situación: cuál de las 6 situaciones (1-3 en eet1, 4-6 en eet2) se paga
     if subsession.round_number == 1:
         for p in subsession.get_players():
             p.participant.vars['icl_payoffA_1'] = [C.PAYOFF_A]
             p.participant.vars['icl_switching_row_1'] = 2 ** C.NUM_CHOICES
+            p.participant.vars['eet_rol_pagado'] = random.choice(['envia', 'recibe'])
             p.participant.vars['eet_round_to_pay'] = random.randint(1, 6)
 
 

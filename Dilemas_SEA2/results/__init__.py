@@ -160,18 +160,18 @@ class Player(BasePlayer):
         widget=widgets.RadioSelectHorizontal(),
         verbose_name="Antes de criticar a alguien, intento imaginar cómo me sentiría si estuviera en su lugar."
     )
-    # Exposición a grupos armados y violencia (pregunta 1 de Survey_2)
-    violencia_a = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
-    violencia_b = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
-    violencia_c = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
-    violencia_d = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
-    violencia_e = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
-    violencia_f = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
-    violencia_g = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
-    violencia_h = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
-    violencia_i = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
-    violencia_j = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
-    violencia_k = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
+    # Exposición a grupos armados y violencia (pregunta 1 de Survey_2): opcionales, se pueden dejar en blanco
+    violencia_a = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal, blank=True)
+    violencia_b = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal, blank=True)
+    violencia_c = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal, blank=True)
+    violencia_d = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal, blank=True)
+    violencia_e = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal, blank=True)
+    violencia_f = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal, blank=True)
+    violencia_g = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal, blank=True)
+    violencia_h = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal, blank=True)
+    violencia_i = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal, blank=True)
+    violencia_j = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal, blank=True)
+    violencia_k = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal, blank=True)
     # Solo si violencia_k = 1
     violencia_l_anio = models.IntegerField(min=1950, max=2026, blank=True)
     violencia_l_mes = models.IntegerField(
@@ -181,6 +181,9 @@ class Player(BasePlayer):
     )
     age = models.IntegerField()
     gender_sex = models.IntegerField(choices=[[0, "Masculino"], [1, "Femenino"], [2, "Otro"]])
+    # preguntas abiertas: si no sabe puede escribir "No sé"
+    universidad_deseada = models.StringField()
+    carrera_deseada = models.StringField()
     stratum = models.IntegerField(
         choices=[[0, "No estratificado"], [1, "1"], [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"]]
     )
@@ -263,15 +266,10 @@ class Survey_2(Page):
     form_fields = ["violencia_a", "violencia_b", "violencia_c", "violencia_d", "violencia_e", "violencia_f",
                     "violencia_g", "violencia_h", "violencia_i", "violencia_j", "violencia_k",
                     "violencia_l_anio", "violencia_l_mes",
-                    "age", "gender_sex", "stratum", "experiments", "income",
+                    "age", "gender_sex", "universidad_deseada", "carrera_deseada", "stratum", "experiments", "income",
                     "mother_educ", "father_educ", "income_stair", "cantril_now", "cantril_5y",
                     "risk_measure", "G_trust", "math_self", "patience", "punish_justice"
     ]
-
-    @staticmethod
-    def error_message(player: Player, values):
-        if values['violencia_k'] == 1 and (values['violencia_l_anio'] is None or values['violencia_l_mes'] is None):
-            return "Por favor indique el año y el mes en la pregunta 1 (l)."
 
     def before_next_page(player:Player, timeout_happened):
         pago_aprobacion_social = player.participant.vars.get('pago_aprobacion_social', 0)

@@ -201,9 +201,6 @@ class Decision(Page):
 
 
 class Results(Page):
-    form_model = 'player'
-    form_fields = ['payoff_total', 'payoff_resignation', 'payoff_otherPlayer']
-
     @staticmethod
     def is_displayed(player: Player):
         return player.round_number == C.NUM_ROUNDS
@@ -212,7 +209,6 @@ class Results(Page):
     def vars_for_template(player: Player):
         pv = player.participant.vars
         choice_to_pay = pv['eet_round_to_pay']
-        total = int(player.payoff_r + player.payoff_s)
         return dict(
             common_vars(),
             payoffA=fmt(pv['eet_payoffA']),
@@ -223,8 +219,6 @@ class Results(Page):
             other_A_paid='$6,500' if choice_to_pay < 4 else '$3,500',
             payoff_s=fmt(player.payoff_s),
             payoff_r=fmt(player.payoff_r),
-            payoff_total=fmt(total),
-            payoff_total_int=total,
         )
 
 

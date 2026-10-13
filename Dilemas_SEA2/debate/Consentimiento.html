@@ -7,20 +7,20 @@
 
 
 <p>
-    Usted ha sido seleccionado(a) para participar en una encuesta porque es un
+    Usted ha sido invitado(a) para participar en una encuesta porque es un
     estudiante de grado 11 residente en el departamento de Arauca. Por
     favor lea cuidadosamente la información que se presenta a continuación.
     Recuerde que tiene plena libertad de formular preguntas sobre la encuesta a
     las facilitadoras de la actividad y decidir si desea participar o no. Si
     decide participar, firme este documento. Si decide no hacerlo, por favor no
     lea las siguientes páginas. Puede solicitar una copia digital de este
-    documento y se lo enviaremos por WhatsApp. El monto mínimo que recibirá por
-    completar toda la actividad es de 10.000 pesos, el monto variable va de 0 a 36.000 pesos. Las decisiones y los pagos
-    asociados a estas se explicarán en las instrucciones. Las ganancias serán
-    procesadas después de que termine de responder la encuesta final de la
-    actividad. En la invitación recibió un código de participante, no pierda ese
-    código pues lo necesitará para reclamar sus ganancias. Cada participante
-    recibirá sus pagos en privado.
+    documento y se lo enviaremos por WhatsApp. El monto variable que recibirá
+    por completar toda la actividad está entre 10.000 y 58.500 pesos. Las
+    decisiones y los pagos asociados a estas se explicarán en las
+    instrucciones. Las ganancias serán procesadas después de que termine de
+    responder la encuesta final de la actividad. Recibirá un código de
+    participante, no pierda ese código pues lo necesitará para reclamar sus
+    ganancias. Cada participante recibirá sus pagos en privado.
 </p>
 
 <p>
@@ -83,15 +83,16 @@
 </p>
 
 <p>
-    Yo, {{ formfield player.nombre_participante label="" }}, identificado/a con documento
-    de identidad número {{ formfield player.documento_participante label="" }} he leído y
-    entendido la información contenida en este documento; por lo tanto, voluntariamente
+    Yo, la persona identificada a continuación, he leído y entendido la
+    información contenida en este documento; por lo tanto, voluntariamente
     acepto participar en esta investigación.
-    Teléfono: {{ formfield player.telefono_participante label="" }}
 </p>
 
-{{formfield player.consentimiento }}
-<br>
+{{ formfield player.nombre_participante label="Nombre completo" }}
+{{ formfield player.documento_participante label="Número de documento de identidad" }}
+{{ formfield player.telefono_participante label="Teléfono (WhatsApp)" }}
+
+{{ formfield player.consentimiento label="¿Acepta participar en esta investigación?" }}
 
 {{ next_button }}
 

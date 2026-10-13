@@ -116,67 +116,11 @@
                     "Option {{ payoff_relevant }}" was randomly chosen to determine your payment.
                 <br/>
             {{ else }}
-                    En la Opción {{ option_to_pay }} usted recibe {{ payoff_s }} y la otra persona recibe {{ payoff_r }}. <br> La suma de lo que ambos recibirían es: {{ payoff_total }} <br>
-        </div>
-        <br>
-            <h4 class="intermedio">Reasignación</h4>
-                <p>Escriba en el siguiente cuadro, cómo reasignaría el dinero si fuese emparejado con una persona.<br>
-                    <i>Sólo tiene que escribir cuanto asignaría para usted en el cuadro y el computador calculará cuanto recibiría la otra persona.</i></p>
-                    <br>
-                    <table class="table_reasignacion">
-                        <tr>
-                            <td rowspan="2"><b>Total a reasignar</b></td>
-                            <td colspan="2"><b>Reasignación</b></td>
-                        </tr>
-                        <tr>
-                            <td>Lo que usted recibirá</td>
-                            <td>Lo que la otra persona recibirá</td>
-                        </tr>
-                        <tr>
-                            <td>{{ payoff_total }}<input type="hidden" name="payoff_total" id="payoff_total" value="{{ payoff_total_int }}"></td>
-                            <td>$ <input type="number" name="payoff_resignation" id="payoff_resignation" required="" min="0" max="{{ payoff_total_int }}" onkeyup="calcularDinero()" oninput="calcularDinero()"></td>
-                            <td><p id="payoff_otherPlayer_str">$ 0</p><input type="hidden" name="payoff_otherPlayer" id="payoff_otherPlayer"></td>
-                        </tr>
-                    </table>
-                    {{ formfield_errors 'payoff_resignation' }}
-                    {{ formfield_errors 'payoff_otherPlayer' }}
+                    En la Opción {{ option_to_pay }} usted recibe {{ payoff_s }} y la otra persona recibe {{ payoff_r }}.
             {{ endif }}
-
+        </div>
 
     </div>
-    <script>
-        var total_pagar = {{ payoff_total_int }};
-
-        document.getElementById('payoff_resignation').addEventListener('keypress', function (e){
-            if (!soloNumeros(e)){
-                e.preventDefault();
-            }
-        })
-
-        function soloNumeros(e) {
-            var key = e.charCode;
-            return key >= 48 && key <= 57;
-        }
-
-        function calcularDinero() {
-            var dineroResignacion = document.getElementById('payoff_resignation').value;
-            if(dineroResignacion < 0){
-                document.getElementById('payoff_resignation').value = 0;
-                dineroResignacion = 0;
-            }
-            if(dineroResignacion > total_pagar){
-                document.getElementById('payoff_resignation').value = total_pagar;
-                dineroResignacion = total_pagar;
-            }
-            var dineroOther = total_pagar - dineroResignacion;
-            document.getElementById('payoff_otherPlayer').value = dineroOther;
-            document.getElementById('payoff_otherPlayer_str').innerHTML = '$ '+numberWithCommas(dineroOther);
-        }
-
-        function numberWithCommas(x) {
-            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
-    </script>
 
     {{ next_button }}
 

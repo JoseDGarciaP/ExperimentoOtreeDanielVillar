@@ -9,6 +9,7 @@ class C(BaseConstants):
     NAME_IN_URL = 'results'
     PLAYERS_PER_GROUP = 2
     NUM_ROUNDS = 1
+    PAGO_MINIMO = 10000  # piso del pago total, según el consentimiento (entre 10.000 y 58.500)
 
 class Subsession(BaseSubsession):
     pass
@@ -276,7 +277,8 @@ class Survey_2(Page):
         final_payoff = player.participant.vars.get('final_payoff', 0)
         # ganancia adicional de eet1/eet2: situación sorteada (1-6) y rol sorteado (envía/recibe), calculada en eet2
         pago_eet = int(player.participant.vars.get('pago_eet', 0))
-        player.payoff_complete = int(final_payoff) + pago_cal_usted + pago_aprobacion_social + pago_eet
+        suma = int(final_payoff) + pago_cal_usted + pago_aprobacion_social + pago_eet
+        player.payoff_complete = max(suma, C.PAGO_MINIMO)
 
 class Final(Page):
     form_model = 'player'
@@ -291,6 +293,7 @@ class Final(Page):
         eet_situacion = player.participant.vars.get('eet_round_to_pay', 0)
         eet_rol = 'quien envía' if player.participant.vars.get('eet_rol_pagado') == 'envia' else 'quien recibe'
         payoff_complete = player.payoff_complete
+        suma = int(final_payoff) + pago_cal_usted + pago_aprobacion_social + pago_eet
         return{
             'eet_situacion': eet_situacion,
             'eet_rol': eet_rol,
@@ -299,7 +302,9 @@ class Final(Page):
             'final_payoff':final_payoff,
             'selected_round':selected_round,
             'pago_eet': pago_eet,
-            'payoff_complete': payoff_complete
+            'payoff_complete': payoff_complete,
+            'piso_aplicado': suma < C.PAGO_MINIMO,
+            'pago_minimo': C.PAGO_MINIMO,
             
         }
 

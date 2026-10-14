@@ -23,6 +23,11 @@
     En la Parte final se sorteó la situación {{ eet_situacion }} y se le paga lo que recibe {{ eet_rol }}.
     Su ganancia adicional en la Parte final fue: {{ pago_eet }}
 </p>
+{% if piso_aplicado %}
+<p>
+    La suma de sus ganancias es menor que el pago mínimo de la actividad, por eso recibirá {{ pago_minimo }}.
+</p>
+{% endif %}
 <p>
     Por lo tanto, su ganancia total es <b>{{payoff_complete}}</b>.  
 </p>

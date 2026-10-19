@@ -33,7 +33,7 @@ class Player(BasePlayer):
     
     consentimiento = models.BooleanField(
         choices=[
-            [True, 'Sí acepto participar.'],
+            [True, 'Sí. He leído y entendido la información contenida en este documento; por lo tanto, voluntariamente acepto participar en esta investigación.'],
             [False, 'No acepto participar.']
             ],
         label='¿Aceptar términos?', widget=widgets.RadioSelect)
@@ -144,9 +144,7 @@ def minimo_cinco_palabras(texto):
 
 class Consentimiento(Page):
     form_model = 'player'
-    form_fields = [
-        'nombre_participante', 'documento_participante',
-        'telefono_participante', 'consentimiento',
+    form_fields = [ 'consentimiento',
     ]
     @staticmethod
     # Método para personalizar el flujo de avance

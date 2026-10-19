@@ -15,6 +15,11 @@ SESSION_CONFIGS = [
             display_name='EET (eet1 + eet2)',
             num_demo_participants=1,
             app_sequence=['eet1', 'eet2']),
+    dict(
+                name='results',
+                display_name='results',
+                num_demo_participants=1,
+                app_sequence=['results'])
             ]
 LANGUAGE_CODE = 'es'
 REAL_WORLD_CURRENCY_CODE = 'USD'

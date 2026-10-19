@@ -235,6 +235,31 @@ class Player(BasePlayer):
                 [2, "Poco"],
                 [1, "Nada"]]
     )
+    # Preguntas 19 a 24 de Survey_2: trayectoria educativa y laboral
+    carrera_tipo = models.IntegerField(
+        choices=[[0, "No sé"],
+                [1, "Ninguna (11°)"],
+                [2, "Técnica/Tecnológica"],
+                [3, "Militar"],
+                [4, "Profesional"]],
+        widget=widgets.RadioSelect
+    )
+    prob_educ_superior = models.IntegerField(min=0, max=100)
+    orientacion_ocupacional = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
+    pre_icfes = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
+    trabaja_estudia = models.IntegerField(choices=[[1, "Sí"], [0, "No"]], widget=widgets.RadioSelectHorizontal)
+    # Solo si trabaja_estudia = 1
+    motivo_trabajo = models.IntegerField(
+        choices=[[1, "Para ganar dinero"],
+                [2, "Para ayudar a la familia"],
+                [3, "Experiencia laboral/hoja de vida"],
+                [4, "Para pagar sus gastos de estudio"],
+                [5, "Otro"]],
+        widget=widgets.RadioSelect,
+        blank=True
+    )
+    # Solo si motivo_trabajo = 5 (Otro)
+    motivo_trabajo_otro = models.StringField(blank=True)
     payoff_complete = models.IntegerField()
 
 # PAGES
@@ -268,10 +293,26 @@ class Survey_2(Page):
                     "violencia_l_anio", "violencia_l_mes",
                     "age", "gender_sex", "universidad_deseada", "carrera_deseada", "stratum", "experiments", "income",
                     "mother_educ", "father_educ", "income_stair", "cantril_now", "cantril_5y",
-                    "risk_measure", "G_trust", "math_self", "patience", "punish_justice"
+                    "risk_measure", "G_trust", "math_self", "patience", "punish_justice",
+                    "carrera_tipo", "prob_educ_superior", "orientacion_ocupacional", "pre_icfes",
+                    "trabaja_estudia", "motivo_trabajo", "motivo_trabajo_otro"
     ]
 
+    @staticmethod
+    def error_message(player: Player, values):
+        # La 24 es obligatoria solo si en la 23 respondió "Sí"; "Otro" exige escribir el motivo
+        if values['trabaja_estudia'] == 1:
+            if values['motivo_trabajo'] is None:
+                return dict(motivo_trabajo="Por favor indique su motivo principal para trabajar mientras estudiaba.")
+            if values['motivo_trabajo'] == 5 and not (values['motivo_trabajo_otro'] or '').strip():
+                return dict(motivo_trabajo_otro="Por favor escriba cuál fue el otro motivo.")
+
     def before_next_page(player:Player, timeout_happened):
+        # Si cambió la 23 a "No" (o el motivo a otro distinto de "Otro"), no guardar respuestas que quedaron ocultas
+        if player.trabaja_estudia != 1:
+            player.motivo_trabajo = None
+        if player.field_maybe_none('motivo_trabajo') != 5:
+            player.motivo_trabajo_otro = None
         pago_aprobacion_social = player.participant.vars.get('pago_aprobacion_social', 0)
         pago_cal_usted = player.participant.vars.get('pago_cal_usted', 0)
         final_payoff = player.participant.vars.get('final_payoff', 0)

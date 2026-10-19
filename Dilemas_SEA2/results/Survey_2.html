@@ -30,6 +30,46 @@
             width: 50%;
         }
         .result{font-size:0.850em;line-height:0.1em;margin:-0px 0 20px 20px}
+        /* Sí/No de la pregunta 1: cada círculo queda pegado a su texto y no se parten en celular */
+        .respuesta-sino {
+            white-space: nowrap;
+            width: 1%;
+            vertical-align: middle;
+        }
+        .opcion-sino {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin: 0 10px 0 0;
+            cursor: pointer;
+        }
+        .respuesta-sino > :not(label) {
+            white-space: normal;   /* el mensaje de error sí puede partirse en varias líneas */
+        }
+        .opcion-sino:last-of-type {
+            margin-right: 0;
+        }
+        @media (max-width: 576px) {
+            /* En celular, la respuesta de cada pregunta va debajo del enunciado */
+            .wrap {
+                flex-direction: column;
+                align-items: stretch !important;
+            }
+            .wrap > .inner, .wrap > .result {
+                align-self: stretch;
+                max-width: 100%;
+                margin-left: 0 !important;
+            }
+            .form-select, .form-control {
+                max-width: 100%;
+            }
+            .respuesta-sino {
+                padding-left: 4px !important;
+            }
+            .opcion-sino {
+                margin-right: 8px;
+            }
+        }
     </style>
 
 <script src="{{ static 'persist-raw.js' }}"></script>
@@ -42,17 +82,17 @@
 </div>
 <table class="table table-sm">
     <tbody>
-        <tr><td>a) ¿Alguna vez tú o algún miembro de tu familia han visto a un grupo armado o a una banda criminal portar abiertamente armas de fuego o patrullar el territorio?</td><td>{{ for c in form.violencia_a }}{{ c }} {{ c.label }}&nbsp;&nbsp;{{ endfor }}{{ formfield_errors 'violencia_a' }}</td></tr>
-        <tr><td>b) ¿Alguna vez tú o algún miembro de tu familia han visto o escuchado disparos, explosiones, enfrentamientos o peleas con armas en tu barrio?</td><td>{{ for c in form.violencia_b }}{{ c }} {{ c.label }}&nbsp;&nbsp;{{ endfor }}{{ formfield_errors 'violencia_b' }}</td></tr>
-        <tr><td>c) ¿Alguna vez tú o algún miembro de tu familia han visto o escuchado a grupos armados amenazar a tu barrio, por ejemplo, usando panfletos, carteles u otros mensajes?</td><td>{{ for c in form.violencia_c }}{{ c }} {{ c.label }}&nbsp;&nbsp;{{ endfor }}{{ formfield_errors 'violencia_c' }}</td></tr>
-        <tr><td>d) ¿Alguna vez tú o algún miembro de tu familia han estado presentes cuando alguien ha sido herido o asesinado por un grupo armado?</td><td>{{ for c in form.violencia_d }}{{ c }} {{ c.label }}&nbsp;&nbsp;{{ endfor }}{{ formfield_errors 'violencia_d' }}</td></tr>
-        <tr><td>e) ¿Alguno de tus familiares ha sido agredido físicamente o herido por un grupo armado?</td><td>{{ for c in form.violencia_e }}{{ c }} {{ c.label }}&nbsp;&nbsp;{{ endfor }}{{ formfield_errors 'violencia_e' }}</td></tr>
-        <tr><td>f) ¿Alguno de tus familiares ha sido reclutado forzosamente?</td><td>{{ for c in form.violencia_f }}{{ c }} {{ c.label }}&nbsp;&nbsp;{{ endfor }}{{ formfield_errors 'violencia_f' }}</td></tr>
-        <tr><td>g) ¿Alguno de tus familiares ha sido asesinado?</td><td>{{ for c in form.violencia_g }}{{ c }} {{ c.label }}&nbsp;&nbsp;{{ endfor }}{{ formfield_errors 'violencia_g' }}</td></tr>
-        <tr><td>h) ¿Alguna vez tú o algún miembro de tu familia han recibido amenazas individuales o abuso verbal por parte de un grupo armado?</td><td>{{ for c in form.violencia_h }}{{ c }} {{ c.label }}&nbsp;&nbsp;{{ endfor }}{{ formfield_errors 'violencia_h' }}</td></tr>
-        <tr><td>i) ¿Alguna vez tú o algún miembro de tu familia han sido víctimas de extorsión?</td><td>{{ for c in form.violencia_i }}{{ c }} {{ c.label }}&nbsp;&nbsp;{{ endfor }}{{ formfield_errors 'violencia_i' }}</td></tr>
-        <tr><td>j) ¿Alguna vez tú o algún miembro de tu familia han estado encerrados o han tenido que quedarse en casa debido a enfrentamientos armados?</td><td>{{ for c in form.violencia_j }}{{ c }} {{ c.label }}&nbsp;&nbsp;{{ endfor }}{{ formfield_errors 'violencia_j' }}</td></tr>
-        <tr><td>k) ¿Alguna vez tú o algún miembro de tu familia han sido desplazados de su hogar por un grupo armado, la violencia y/o el conflicto armado?</td><td>{{ for c in form.violencia_k }}{{ c }} {{ c.label }}&nbsp;&nbsp;{{ endfor }}{{ formfield_errors 'violencia_k' }}</td></tr>
+        <tr><td>a) ¿Alguna vez tú o algún miembro de tu familia han visto a un grupo armado o a una banda criminal portar abiertamente armas de fuego o patrullar el territorio?</td><td class="respuesta-sino">{{ for c in form.violencia_a }}<label class="opcion-sino">{{ c }} {{ c.label }}</label>{{ endfor }}{{ formfield_errors 'violencia_a' }}</td></tr>
+        <tr><td>b) ¿Alguna vez tú o algún miembro de tu familia han visto o escuchado disparos, explosiones, enfrentamientos o peleas con armas en tu barrio?</td><td class="respuesta-sino">{{ for c in form.violencia_b }}<label class="opcion-sino">{{ c }} {{ c.label }}</label>{{ endfor }}{{ formfield_errors 'violencia_b' }}</td></tr>
+        <tr><td>c) ¿Alguna vez tú o algún miembro de tu familia han visto o escuchado a grupos armados amenazar a tu barrio, por ejemplo, usando panfletos, carteles u otros mensajes?</td><td class="respuesta-sino">{{ for c in form.violencia_c }}<label class="opcion-sino">{{ c }} {{ c.label }}</label>{{ endfor }}{{ formfield_errors 'violencia_c' }}</td></tr>
+        <tr><td>d) ¿Alguna vez tú o algún miembro de tu familia han estado presentes cuando alguien ha sido herido o asesinado por un grupo armado?</td><td class="respuesta-sino">{{ for c in form.violencia_d }}<label class="opcion-sino">{{ c }} {{ c.label }}</label>{{ endfor }}{{ formfield_errors 'violencia_d' }}</td></tr>
+        <tr><td>e) ¿Alguno de tus familiares ha sido agredido físicamente o herido por un grupo armado?</td><td class="respuesta-sino">{{ for c in form.violencia_e }}<label class="opcion-sino">{{ c }} {{ c.label }}</label>{{ endfor }}{{ formfield_errors 'violencia_e' }}</td></tr>
+        <tr><td>f) ¿Alguno de tus familiares ha sido reclutado forzosamente?</td><td class="respuesta-sino">{{ for c in form.violencia_f }}<label class="opcion-sino">{{ c }} {{ c.label }}</label>{{ endfor }}{{ formfield_errors 'violencia_f' }}</td></tr>
+        <tr><td>g) ¿Alguno de tus familiares ha sido asesinado?</td><td class="respuesta-sino">{{ for c in form.violencia_g }}<label class="opcion-sino">{{ c }} {{ c.label }}</label>{{ endfor }}{{ formfield_errors 'violencia_g' }}</td></tr>
+        <tr><td>h) ¿Alguna vez tú o algún miembro de tu familia han recibido amenazas individuales o abuso verbal por parte de un grupo armado?</td><td class="respuesta-sino">{{ for c in form.violencia_h }}<label class="opcion-sino">{{ c }} {{ c.label }}</label>{{ endfor }}{{ formfield_errors 'violencia_h' }}</td></tr>
+        <tr><td>i) ¿Alguna vez tú o algún miembro de tu familia han sido víctimas de extorsión?</td><td class="respuesta-sino">{{ for c in form.violencia_i }}<label class="opcion-sino">{{ c }} {{ c.label }}</label>{{ endfor }}{{ formfield_errors 'violencia_i' }}</td></tr>
+        <tr><td>j) ¿Alguna vez tú o algún miembro de tu familia han estado encerrados o han tenido que quedarse en casa debido a enfrentamientos armados?</td><td class="respuesta-sino">{{ for c in form.violencia_j }}<label class="opcion-sino">{{ c }} {{ c.label }}</label>{{ endfor }}{{ formfield_errors 'violencia_j' }}</td></tr>
+        <tr><td>k) ¿Alguna vez tú o algún miembro de tu familia han sido desplazados de su hogar por un grupo armado, la violencia y/o el conflicto armado?</td><td class="respuesta-sino">{{ for c in form.violencia_k }}<label class="opcion-sino">{{ c }} {{ c.label }}</label>{{ endfor }}{{ formfield_errors 'violencia_k' }}</td></tr>
         <tr id="fila_violencia_l" style="display: none;">
             <td>l) ¿Cuándo fue el último desplazamiento de tu hogar?</td>
             <td>
@@ -91,34 +131,37 @@
     </div>
 </div>
 <div class="d-flex align-items-start wrap">
-    <p class="inner" align="justify"><b>4)</b> ¿En qué universidad quiere estudiar? &nbsp;&nbsp;</p>
-    <div class="inner">
+    <p class="inner" align="justify"><b>4)</b> Escriba el nombre de la institución educativa en la que le gustaría estudiar. También puede escribir "NO SÉ": &nbsp;&nbsp;</p>
+    
+</div>
+<div class="inner" style="margin-left: 20px;">
         {%formfield player.universidad_deseada label="" %}
     </div>
-</div>
 <div class="d-flex align-items-start wrap">
-    <p class="inner" align="justify"><b>5)</b> ¿Qué carrera quiere estudiar? &nbsp;&nbsp;</p>
-    <div class="inner">
+    <p class="inner" align="justify"><b>5)</b> ¿Cuál es la profesión, oficio u ocupación que considere ideales para usted? &nbsp;&nbsp;</p>
+    
+</div>
+<div class="inner" style="margin-left: 20px;">
         {%formfield player.carrera_deseada label="" %}
     </div>
-</div>
-
 
 
     <div class="d-flex align-items-start wrap">
         <p class="inner" align="justify"><b>6)</b> De acuerdo con las facturas de servicios, ¿Cuál es el estrato de la vivienda en la cual reside?: &nbsp;&nbsp;</p>
-        <div class="inner">
+        
+    </div>
+    <div class="inner" style="margin-left: 20px;">
             {%formfield player.stratum  label=""%}
         </div>
-    </div>
 
     <div>
         <div class="d-flex align-items-start wrap">
         <p class="inner" align="justify"><b>7)</b> ¿Ha participado antes en actividades de psicología? &nbsp;&nbsp;</p>
-        <div class="inner">
+        
+    </div>
+    <div class="inner" style="margin-left: 20px;">
             {%formfield player.experiments label=""%}
         </div>
-    </div>
     <div class="d-flex align-items-start wrap">
         <p  class="inner" align="justify"><b>8)</b> A cuánto ascienden aproximadamente sus ingresos semanales (en pesos): (Incluya todo tipo de ingresos ej: mesadas, ingresos laborales, rentas, etc.) </p>
         <div class="result">
@@ -243,11 +286,79 @@
 {{ formfield_errors 'patience' }}
 
 <div class="d-flex align-items-start wrap">
-    <p class="inner" align="justify"><b>18)</b> Si usted fuera víctima de un robo o asalto, ¿cuánto confiaría que el sistema judicial castigue al culpable?  &nbsp;&nbsp;</p>
-    <div class="inner">
+    <p class="inner" align="justify"><b>18)</b> Si usted fuera víctima de un robo o asalto, ¿cuánto confiaría que el sistema judicial castigue al culpable? </p>
+    
+</div>
+<div class="inner" style="margin-left: 20px;">
         {%formfield player.punish_justice label=""%}
     </div>
+
+<div class="d-flex align-items-start wrap">
+    <p class="inner" align="justify"><b>19)</b> ¿Qué tipo de carrera considera necesaria para hacer lo que más le gustaría?</p>
 </div>
+<div class="inner" style="margin-left: 20px;">
+        {%formfield player.carrera_tipo label=""%}
+    </div>
+
+<div class="d-flex align-items-start wrap">
+    <p class="inner" align="justify"><b>20)</b> En una escala del 0 al 100, donde <b>0 es "no voy a continuar estudiando"</b> y <b>100 es "con toda seguridad voy a ingresar a un programa de Educación Superior"</b>, por favor díganos ¿Qué tan probable es que el próximo año ingrese a un programa de Educación Superior?</p>
+</div>
+<div style="width: 140px; margin-left: 20px;">
+    {%formfield player.prob_educ_superior label=""%}
+</div>
+
+<div class="d-flex align-items-start wrap">
+    <p class="inner" align="justify"><b>21)</b> ¿Ha participado antes en alguna actividad de orientación ocupacional?  &nbsp;&nbsp;</p>
+    <div class="inner">
+        {%formfield player.orientacion_ocupacional label=""%}
+    </div>
+</div>
+
+<div class="d-flex align-items-start wrap">
+    <p class="inner" align="justify"><b>22)</b> ¿Ha participado antes en alguna actividad de preparación para el Saber 11 (pre-ICFES)?  &nbsp;&nbsp;</p>
+    <div class="inner">
+        {%formfield player.pre_icfes label=""%}
+    </div>
+</div>
+
+<div class="d-flex align-items-start wrap">
+    <p class="inner" align="justify"><b>23)</b> ¿Ha trabajado y estudiado al mismo tiempo?  &nbsp;&nbsp;</p>
+    <div class="inner">
+        {%formfield player.trabaja_estudia label=""%}
+    </div>
+</div>
+
+<div id="bloque_motivo_trabajo" style="display: none;">
+    <div class="d-flex align-items-start wrap">
+        <p class="inner" align="justify"><b>24)</b> ¿Cuál fue su motivo principal para trabajar mientras estudiaba?  &nbsp;&nbsp;</p>
+        <div class="inner">
+            {%formfield player.motivo_trabajo label=""%}
+        </div>
+    </div>
+    <div id="bloque_motivo_otro" class="d-flex align-items-center" style="display: none !important; gap: 6px; margin-left: 20px;">
+        Otro, ¿cuál?: <span style="width: 300px;">{{ form.motivo_trabajo_otro }}</span>
+    </div>
+    {{ formfield_errors 'motivo_trabajo_otro' }}
+</div>
+<script>
+    // La 24 solo aparece si respondió "Sí" en la 23; el campo de texto solo si eligió "Otro"
+    function mostrarMotivoTrabajo() {
+        var t = document.querySelector('input[name="trabaja_estudia"]:checked');
+        var m = document.querySelector('input[name="motivo_trabajo"]:checked');
+        var trabaja = t && t.value === '1';
+        document.getElementById('bloque_motivo_trabajo').style.display = trabaja ? '' : 'none';
+        var otro = document.getElementById('bloque_motivo_otro');
+        if (trabaja && m && m.value === '5') {
+            otro.style.setProperty('display', 'flex', 'important');
+        } else {
+            otro.style.setProperty('display', 'none', 'important');
+        }
+    }
+    document.querySelectorAll('input[name="trabaja_estudia"], input[name="motivo_trabajo"]').forEach(function (r) {
+        r.addEventListener('change', mostrarMotivoTrabajo);
+    });
+    document.addEventListener('DOMContentLoaded', mostrarMotivoTrabajo);
+</script>
 
 
 

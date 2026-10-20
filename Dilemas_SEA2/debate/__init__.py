@@ -72,6 +72,11 @@ class Player(BasePlayer):
 
 ### Functions ###
 def creating_session(self):
+    if len(self.get_players()) % 4 != 0:
+        raise ValueError(
+            "Esta sesión necesita un múltiplo de 4 participantes (4, 8, 12...). "
+            "Las personas que sobren deben jugar la sesión 'debate_conflict_donantes'."
+        )
     num_grupos = len(self.get_groups())
     treatments = [1]*(num_grupos // 2) + [0]*(num_grupos // 2)
     random.shuffle(treatments)

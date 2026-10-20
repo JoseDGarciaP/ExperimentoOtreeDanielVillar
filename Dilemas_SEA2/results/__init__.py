@@ -7,7 +7,7 @@ Your app description
 
 class C(BaseConstants):
     NAME_IN_URL = 'results'
-    PLAYERS_PER_GROUP = 2
+    PLAYERS_PER_GROUP = None  # encuesta individual: permite sesiones con cualquier número de personas
     NUM_ROUNDS = 1
     PAGO_MINIMO = 10000  # piso del pago total, según el consentimiento (entre 10.000 y 58.500)
 

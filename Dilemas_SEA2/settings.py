@@ -7,6 +7,13 @@ SESSION_CONFIGS = [
         app_sequence=['debate','conflict','eet1','eet2','results'])
         ,
     dict(
+        # Para las personas que sobran cuando no se completa un grupo de 4 (1, 2 o 3 personas).
+        # Cada una juega sola contra los perfiles de perfiles_donantes.csv.
+        name='debate_conflict_donantes',
+        display_name='Debate + conflicto (con perfiles donantes)',
+        num_demo_participants=1,
+        app_sequence=['debate_donantes','conflict_donantes','eet1','eet2','results']),
+    dict(
             name='conflict', 
             num_demo_participants=4, 
             app_sequence=['conflict']),
@@ -31,6 +38,11 @@ ROOMS = [
     dict(
         name='dilemas',
         display_name='Dilemas',
+        participant_label_file='_rooms/dilemas.txt',
+    ),
+    dict(
+        name='dilemas_donantes',
+        display_name='Dilemas (perfiles donantes)',
         participant_label_file='_rooms/dilemas.txt',
     ),
 ]

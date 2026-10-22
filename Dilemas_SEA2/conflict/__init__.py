@@ -34,6 +34,9 @@ class Player(BasePlayer):
         label='¿Qué crees que elige el otro participante en esta situación?'
     )
     cooperate_accuracy = models.IntegerField(min=0, max=100, label='¿Qué tan seguro está?')
+    # Ganancia de esta ronda. No se usa player.payoff: oTree sumaria las 4 rondas en Monitor/Payments,
+    # pero solo se paga la ronda sorteada (el total real queda en results.payoff_complete).
+    pago_ronda = models.CurrencyField(initial=0)
 
 def creating_session(self):
     if self.round_number == 1:
@@ -75,7 +78,7 @@ def other_player(player: Player):
 
 def set_payoff(player: Player):
     other = other_player(player)
-    player.payoff = get_payoff_for_round(player, other.cooperate)
+    player.pago_ronda = get_payoff_for_round(player, other.cooperate)
 
 ### Pages ###
 class Introduction(Page):
@@ -114,7 +117,7 @@ class TotalResult(Page):
     @staticmethod
     def vars_for_template(player: Player):
         selected_round = player.participant.vars['selected_round']
-        selected_round_payoff = player.in_round(selected_round).payoff
+        selected_round_payoff = player.in_round(selected_round).pago_ronda
         
         return {
             "selected_round": selected_round,
@@ -123,6 +126,6 @@ class TotalResult(Page):
     
     def before_next_page(player: Player, timeout_happened):
         
-        player.participant.vars['final_payoff'] = player.in_round(player.participant.vars['selected_round']).payoff
+        player.participant.vars['final_payoff'] = player.in_round(player.participant.vars['selected_round']).pago_ronda
 
 page_sequence = [Introduction, Decision, ResultsWaitPage, TotalResult]

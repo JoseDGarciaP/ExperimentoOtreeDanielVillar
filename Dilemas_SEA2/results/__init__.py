@@ -320,6 +320,8 @@ class Survey_2(Page):
         pago_eet = int(player.participant.vars.get('pago_eet', 0))
         suma = int(final_payoff) + pago_cal_usted + pago_aprobacion_social + pago_eet
         player.payoff_complete = max(suma, C.PAGO_MINIMO)
+        # Lo que muestran Monitor y Payments de oTree (participant.payoff) = lo que ve el estudiante
+        player.payoff = player.payoff_complete
 
 class Final(Page):
     form_model = 'player'

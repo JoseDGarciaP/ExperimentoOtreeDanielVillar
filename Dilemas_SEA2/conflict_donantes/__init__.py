@@ -50,6 +50,8 @@ class Player(BasePlayer):
     # Trazabilidad
     donante_pareja = models.StringField()
     cooperate_donante = models.BooleanField(doc='Decisión del donante-pareja en esta misma situación (True = A)')
+    # Ganancia de esta ronda (igual que en 'conflict': no se usa player.payoff)
+    pago_ronda = models.CurrencyField(initial=0)
 
 
 def creating_session(subsession: Subsession):
@@ -96,7 +98,7 @@ def set_payoff(player: Player):
     d = donante_de(player)
     player.donante_pareja = d['codigo']
     player.cooperate_donante = d['coopera_por_situacion'][get_level_index(player)]
-    player.payoff = get_payoff_for_round(player, player.cooperate_donante)
+    player.pago_ronda = get_payoff_for_round(player, player.cooperate_donante)
 
 
 ### Páginas (mismas plantillas que la app 'conflict') ###
@@ -147,12 +149,12 @@ class TotalResult(Page):
         selected_round = player.participant.vars['selected_round']
         return {
             "selected_round": selected_round,
-            "final_payoff": player.in_round(selected_round).payoff,
+            "final_payoff": player.in_round(selected_round).pago_ronda,
         }
 
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
-        player.participant.vars['final_payoff'] = player.in_round(player.participant.vars['selected_round']).payoff
+        player.participant.vars['final_payoff'] = player.in_round(player.participant.vars['selected_round']).pago_ronda
 
 
 page_sequence = [Introduction, Decision, TotalResult]

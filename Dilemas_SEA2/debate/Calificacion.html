@@ -9,41 +9,79 @@
         formElement = document.getElementById("form");
     });
 
+    var selectedOption = null;
+
+    // Casilla de destino (o la fila de valores) que contiene el elemento tocado/soltado
+    function containerFrom(el) {
+        return el.closest('.asignacion, .receiver_default_asignacion');
+    }
+
+    // Mueve un valor a una casilla o de vuelta a la fila de valores
+    function moveOption(option, target) {
+        var origin = option.parentElement;
+        if (!target || target === origin) return;
+
+        if (target.classList.contains('asignacion')) {
+            // Si la casilla ya tenía un valor, se devuelve a la fila de valores
+            var previous = target.querySelector('.option_asignacion');
+            if (previous) {
+                document.querySelector('.receiver_default_asignacion').appendChild(previous);
+            }
+            target.firstElementChild.value = option.textContent;
+            target.style.borderColor = "#ffffffff";
+        }
+        target.appendChild(option);
+
+        if (origin.classList.contains('asignacion')) {
+            origin.style.borderColor = "#ff000077";
+            origin.firstElementChild.removeAttribute("value");
+        }
+    }
+
+    function clearSelection() {
+        if (selectedOption) selectedOption.classList.remove('seleccionado');
+        selectedOption = null;
+    }
+
+    // Arrastrar con el ratón (ordenador)
     function allowDrop(event) {
         event.preventDefault();
     }
 
     function drag(event) {
-        event.dataTransfer.setData("text", event.target.id);  
-        event.dataTransfer.setData("parent", event.target.parentElement.id);  
+        event.dataTransfer.setData("text", event.target.id);
     }
 
     function drop(event) {
         event.preventDefault();
-        var draggedElementId = event.dataTransfer.getData("text"); 
-        var parentElementId = event.dataTransfer.getData("parent"); 
-        var draggedElementClass = document.getElementById(draggedElementId).className;
-        var dropTargetClass = event.target.className;
-
-        if (dropTargetClass == 'receiver_default_asignacion') {
-            if (draggedElementClass == 'option_asignacion') {
-                event.target.appendChild(document.getElementById(draggedElementId)); 
-                document.getElementById(parentElementId).style.borderColor = "#ff000077";  
-                document.getElementById(parentElementId).firstElementChild.removeAttribute("value");  
-            }
-        } else if (draggedElementClass == 'option_asignacion') {
-            if (dropTargetClass == 'asignacion') {
-                event.target.firstElementChild.value = document.getElementById(draggedElementId).textContent; 
-                event.target.appendChild(document.getElementById(draggedElementId));  
-                event.target.style.borderColor = "#ffffffff";  
-
-                if (document.getElementById(parentElementId).className == 'asignacion') {
-                    document.getElementById(parentElementId).style.borderColor = "#ff000077";  
-                    document.getElementById(parentElementId).firstElementChild.removeAttribute("value"); 
-                }
-            }
+        var option = document.getElementById(event.dataTransfer.getData("text"));
+        if (option && option.classList.contains('option_asignacion')) {
+            moveOption(option, containerFrom(event.target));
         }
+        clearSelection();
     }
+
+    // Tocar el valor y luego tocar la casilla (teléfonos y también ordenador)
+    document.addEventListener('click', function (event) {
+        var option = event.target.closest('.option_asignacion');
+        var target = containerFrom(event.target);
+
+        if (option && option !== selectedOption &&
+            !(selectedOption && target && target.classList.contains('asignacion'))) {
+            clearSelection();
+            selectedOption = option;
+            option.classList.add('seleccionado');
+            return;
+        }
+        if (option && option === selectedOption) {
+            clearSelection();
+            return;
+        }
+        if (selectedOption && target) {
+            moveOption(selectedOption, target);
+            clearSelection();
+        }
+    });
 
     function submitForm() {
         formElement.submit(); 
@@ -84,6 +122,15 @@
         .option_asignacion{
             margin-left: 10px;
             margin-top: 8px;
+            padding: 2px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .option_asignacion.seleccionado {
+            background-color: #cfe2ff;
+            outline: 2px solid #0d6efd;
         }
     
         .asignacion {
@@ -94,12 +141,14 @@
             border-radius: 10px;
             height: 40px;
             padding-top: 7px;
+            cursor: pointer;
         }
     
         .receiver_default_asignacion {
             width: 100%;
             height: 40px;
             display: inline-flex;
+            cursor: pointer;
         }
         .table-expand {
     width: 100%;
@@ -130,7 +179,7 @@
 {{ block content }}
 
 <p>
-    Haga <b>clic</b> sobre el valor y luego <b>arrastre</b> para elegir un número entre 0 y 6000 para cada participante, teniendo en cuenta que no puede colocar el mismo valor para dos personas diferentes.
+    <b>Toque</b> (o haga clic en) un valor y luego <b>toque la casilla</b> donde quiere ponerlo. En computador también puede <b>arrastrarlo</b>. Elija un número entre 0 y 6000 para cada participante, teniendo en cuenta que no puede colocar el mismo valor para dos personas diferentes.
 </p>
 
 <div class="options_tables">
